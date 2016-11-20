@@ -13,8 +13,19 @@ namespace RageGame
         protected int col;
         protected ImageBrush hatter = new ImageBrush();
 
-        public Blok(int row , int col , string kep)
+        bool gravity;
+
+        public bool Gravity
         {
+            get
+            {
+                return gravity;
+            }
+        }
+
+        public Blok(int row , int col , string kep , bool gravity)
+        {
+            this.gravity = gravity;
             this.row = row;
             this.col = col;
             if (kep != null)

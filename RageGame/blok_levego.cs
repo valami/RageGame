@@ -1,11 +1,11 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace RageGame
 {
-    class block_levego : Blok
+    class blok_levego : Blok 
     {
-
-        public block_levego(int row, int col) : base(row, col, null)
+        public blok_levego(int row, int col) : base(row, col, null , true)
         {
 
         }

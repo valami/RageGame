@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 
 namespace RageGame
 {
-    class blok_ko : Blok
+    class blok_ko : Blok 
     {
-
-        public blok_ko(int row , int col) : base (row, col , "ko.png")
+        public blok_ko(int row , int col) : base (row, col , "ko.png" , false)
         {            
 
         }

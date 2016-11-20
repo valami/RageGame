@@ -54,6 +54,8 @@ namespace RageGame
             double kekszar_left = kekSzar.Margin.Left;
             double kekszar_top = kekSzar.Margin.Top;
 
+
+
           //  label.Content = kekszar_left + "\n" + grid_left; 
 
             //Balra
