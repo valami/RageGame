@@ -5,6 +5,4 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RageGame"
         mc:Ignorable="d"
-        Title="MainWindow" Width="550" KeyDown="grid1_KeyDown" ResizeMode="NoResize" Height="350">
-
-</Window>
+        Title="Rage Game" Width="1000" KeyDown="grid1_KeyDown" ResizeMode="NoResize" Height="600" Topmost="True"/>

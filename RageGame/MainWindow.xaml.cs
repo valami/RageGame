@@ -27,12 +27,10 @@ namespace RageGame
             Thickness windowki = window.Margin;
             windowtop = windowki.Top;
             windowbottom = window.Height;
-
             windowright = window.Width;
 
             egy = new Level("lvl1.txt");
-
-            //kékszar
+            #region kekszar
             kekSzar = new Rectangle();
             kekSzar.Name = "kekSzar";
             kekSzar.Fill = Brushes.Blue;
@@ -40,11 +38,13 @@ namespace RageGame
             kekSzar.Height = 100;
             kekSzar.VerticalAlignment = VerticalAlignment.Top;
             kekSzar.Width = 50;
-           // kekSzar.SetValue(Grid.SetZIndex, 2);
+            kekSzar.SetValue(Grid.RowSpanProperty, 200);
+            kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
             this.Content = egy.racs;
 
             Grid g = (this.Content as Grid);
             g.Children.Add(kekSzar);
+            #endregion
         }
 
         private void grid1_KeyDown(object sender, KeyEventArgs e)

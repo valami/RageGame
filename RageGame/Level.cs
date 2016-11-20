@@ -18,11 +18,11 @@ namespace RageGame
             racs.Name = "racs";
             racs.HorizontalAlignment =HorizontalAlignment.Left;
             racs.VerticalAlignment = VerticalAlignment.Top;
-            racs.Height = 300;
-            racs.Margin = new Thickness(10,10,10,10);
+            racs.Height = 600;
+            racs.Margin = new Thickness(0,0,0,0);
             racs.Width = hossz * 60;
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i <11; i++)
             {
                 RowDefinition a = new RowDefinition();
                 a.Height = new GridLength(60);
@@ -46,15 +46,13 @@ namespace RageGame
                 int i = 0;
                 foreach (string item in blok)
                 {
-
                     if (o == 0)
                     {
                         ColumnDefinition a = new ColumnDefinition();
                         a.Width = new GridLength(60);
                         racs.ColumnDefinitions.Add(a);
                     }
-
-
+                    
                     if (item == "k")
                         racs.Children.Add(new blok_ko(o, i).border());
                     else if (item == "f")
@@ -62,9 +60,7 @@ namespace RageGame
                     else if (item == "l")
                         racs.Children.Add(new block_levego(o, i).border());
 
-
                     i++;
-
                 }
                 o++;
             }
