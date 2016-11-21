@@ -45,6 +45,8 @@ namespace RageGame
             Grid g = (this.Content as Grid);
             g.Children.Add(kekSzar);
             #endregion
+
+            Mozgas m = new Mozgas(kekSzar, egy);
         }
 
         private void grid1_KeyDown(object sender, KeyEventArgs e)

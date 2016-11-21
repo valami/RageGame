@@ -19,14 +19,13 @@ namespace RageGame
         {
             Objektum = _objektum;
             level = _level;
+           // Thread thread1 = new Thread(new ThreadStart(gravity));
+            //thread1.Start();
         }
 
 
         private void gravity()
         {
-            BackgroundWorker bw = new BackgroundWorker();
-
-
             double ObjectTop = Objektum.Margin.Top;
             double ObjectButtom = ObjectTop + Objektum.Height;
             double ObjectLeft = Objektum.Margin.Left;
@@ -38,7 +37,7 @@ namespace RageGame
                 double BlokTop = i * 60;
                 if (aktualis.Gravity || ObjectButtom > BlokTop )
                 {
-                    for (int o = 0; o < 7; o++)
+                    while (ObjectButtom > BlokTop)
                     {
                         Objektum.Margin = new System.Windows.Thickness(ObjectLeft,ObjectTop+10,0,0);
                     }
