@@ -1,0 +1,10 @@
+l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,k
+l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,k
+l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,k
+l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,k
+l,l,l,l,l,l,l,l,f,f,f,f,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,k
+l,l,f,f,l,l,f,l,l,l,l,l,l,l,f,f,f,l,l,l,l,f,f,l,l,f,f,l,l,k
+l,f,f,f,f,f,f,l,l,l,l,l,l,f,f,f,f,f,f,l,f,f,f,f,f,f,f,f,f,k
+k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k
+k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k
+k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k
