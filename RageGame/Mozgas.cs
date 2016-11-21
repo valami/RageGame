@@ -12,6 +12,7 @@ namespace RageGame
 {
     class Mozgas
     {
+        //na most vajon működik?
         private Rectangle Objektum;
         static private Level level;
 
