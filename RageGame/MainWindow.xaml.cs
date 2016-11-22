@@ -116,5 +116,5 @@ namespace RageGame
            // label.Content = kekszar_left + "\n" + grid_left *-1 
           //      +"\n" +window.Width;
         }
-       }  
+    }  
 }

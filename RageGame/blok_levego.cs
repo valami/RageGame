@@ -5,7 +5,7 @@ namespace RageGame
 {
     class blok_levego : Blok 
     {
-        public blok_levego(int row, int col) : base(row, col, null , true)
+        public blok_levego(int row, int col) : base(row, col, "levego.jpg" , true)
         {
 
         }

@@ -64,6 +64,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Blok.cs" />
+    <Compile Include="blokk_trukkosFold.cs" />
+    <Compile Include="blok_checkpoint.cs" />
     <Compile Include="blok_fold.cs" />
     <Compile Include="blok_ko.cs" />
     <Compile Include="blok_levego.cs" />
@@ -74,6 +76,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="meretezes.cs" />
     <Compile Include="Mozgas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -106,10 +109,18 @@
     <Resource Include="fold.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ko.png" />
+    <Resource Include="lvl1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="lvl1.txt" />
+    <Resource Include="ko.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="levego.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cp_down.jpg" />
+    <Resource Include="cp_up.jpg" />
+    <Resource Include="fold_trukkos.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
