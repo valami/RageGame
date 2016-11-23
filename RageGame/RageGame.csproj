@@ -64,11 +64,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Blok.cs" />
-    <Compile Include="blokk_trukkosFold.cs" />
-    <Compile Include="blok_checkpoint.cs" />
-    <Compile Include="blok_fold.cs" />
-    <Compile Include="blok_ko.cs" />
-    <Compile Include="blok_levego.cs" />
+    <Compile Include="Blokk_trukkosFold.cs" />
+    <Compile Include="Blok_checkpoint.cs" />
+    <Compile Include="Blok_fold.cs" />
+    <Compile Include="Blok_ko.cs" />
+    <Compile Include="Blok_levego.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

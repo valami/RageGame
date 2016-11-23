@@ -2,10 +2,12 @@
 using System.Windows.Controls;
 namespace RageGame
 {
-    class blok_fold : Blok 
+    class Blok_fold : Blok 
     {
-        bool gravitacio = false;
-        public blok_fold(int row, int col) : base (row, col , "fold.jpg" , false)
+        static string kep = "fold.jpg";
+        static bool szilard = true;
+
+        public Blok_fold(int row, int col) : base(row, col, kep, szilard)
         {
             
         }

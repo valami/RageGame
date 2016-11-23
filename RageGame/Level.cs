@@ -46,32 +46,32 @@ namespace RageGame
 
                     if (item == "k")
                     {
-                        Blok b = new blok_ko(o, i);
+                        Blok b = new Blok_ko(o, i);
                         racs.Children.Add(b.border());
                         sorlista.Add(b);
                     }
 
                     else if (item == "f")
                     {
-                        Blok b = new blok_fold(o, i);
+                        Blok b = new Blok_fold(o, i);
                         racs.Children.Add(b.border());
                         sorlista.Add(b);
                     }
                     else if (item == "l")
                     {
-                        Blok b = new blok_levego(o, i);
+                        Blok b = new Blok_levego(o, i);
                         racs.Children.Add(b.border());
                         sorlista.Add(b);
                     }
                     else if (item == "c")
                     {
-                        Blok b = new blok_checkpoint(o, i);
+                        Blok b = new Blok_checkpoint(o, i);
                         racs.Children.Add(b.border());
                         sorlista.Add(b);
                     }
                     else if (item == "t")
                     {
-                        Blok b = new blokk_trukkosFold(o, i);
+                        Blok b = new Blokk_trukkosFold(o, i);
                         racs.Children.Add(b.border());
                         sorlista.Add(b);
                     }

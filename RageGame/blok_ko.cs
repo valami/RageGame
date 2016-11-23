@@ -4,9 +4,12 @@ using System.Windows.Controls;
 
 namespace RageGame
 {
-    class blok_ko : Blok 
+    class Blok_ko : Blok 
     {
-        public blok_ko(int row , int col) : base (row, col , "ko.jpg" , false)
+        static string kep = "ko.jpg";
+        static bool szilard = true;
+
+        public Blok_ko(int row , int col) : base(row, col, kep, szilard)
         {            
 
         }

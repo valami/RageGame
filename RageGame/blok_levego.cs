@@ -3,9 +3,16 @@ using System.Windows.Controls;
 
 namespace RageGame
 {
-    class blok_levego : Blok 
+    class Blok_levego : Blok 
     {
-        public blok_levego(int row, int col) : base(row, col, "levego.jpg" , true)
+        static string kep = "levego.jpg";
+        static bool szilard = false; 
+
+        public Blok_levego(int row, int col) : base(row, col, kep, szilard)
+        {
+
+        }
+        public Blok_levego() : base(0, 0, kep, szilard)
         {
 
         }

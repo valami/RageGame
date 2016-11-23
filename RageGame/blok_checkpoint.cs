@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace RageGame
 {
-    class blok_checkpoint : Blok
+    class Blok_checkpoint : Blok
     {
-        public blok_checkpoint(int row, int col) : base(row, col, "cp_down.jpg" , true)
+        static string kep = "cp_down.jpg";
+        static bool szilard = false;
+
+        public Blok_checkpoint(int row, int col) : base(row, col, kep , szilard)
         {
 
         }

@@ -21,6 +21,10 @@ namespace RageGame
         double windowleft, windowright, windowtop, windowbottom;
         Level egy;
         Rectangle kekSzar;
+        Mozgas m;
+        Grid g;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,20 +42,21 @@ namespace RageGame
             kekSzar.Height = 100;
             kekSzar.VerticalAlignment = VerticalAlignment.Top;
             kekSzar.Width = 50;
+            kekSzar.Margin = new Thickness(35, 10, 0, 0);
             kekSzar.SetValue(Grid.RowSpanProperty, 200);
             kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
             this.Content = egy.racs;
 
-            Grid g = (this.Content as Grid);
+            g = (this.Content as Grid);
             g.Children.Add(kekSzar);
             #endregion
 
-            Mozgas m = new Mozgas(kekSzar, egy);
+            m = new Mozgas(kekSzar, egy , g);
         }
 
         private void grid1_KeyDown(object sender, KeyEventArgs e)
         {
-            Grid g = (this.Content as Grid);
+
             double grid_left = g.Margin.Left;
             double kekszar_left = kekSzar.Margin.Left;
             double kekszar_top = kekSzar.Margin.Top;
@@ -60,11 +65,7 @@ namespace RageGame
             //Balra
             if (e.Key == Key.Left)
             {
-                if (kekszar_left > 30)
-                    kekSzar.Margin = new Thickness(kekszar_left -10, kekszar_top, 0, 0);
-
-                if (kekszar_left == grid_left *-1 + 30 && grid_left <= -10)
-                    g.Margin = new Thickness(grid_left + 10, 0, 0, 0);
+                m.Balra();
             }
 
             //Jobbra
@@ -89,7 +90,7 @@ namespace RageGame
             {
                 if (kekszar_top > 30)
                 {
-                    kekSzar.Margin = new Thickness(kekszar_left, kekszar_top - 10, 0, 0);
+                    kekSzar.Margin = new Thickness(kekszar_left, kekszar_top - 100, 0, 0);
                 }
             }
 

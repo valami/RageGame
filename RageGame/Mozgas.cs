@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 
@@ -12,39 +13,38 @@ namespace RageGame
 {
     class Mozgas
     {
+        bool gravitacio = true;
+        bool balra = false;
+        bool lebeg = true;
+        
         private Rectangle Objektum;
-        static private Level level;
+        private Level level;
+        private Grid grid;
+
         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
 
-        public Mozgas(Rectangle _objektum , Level _level)
+        public void Balra()
+        { 
+            balra = true;
+        }
+
+        public Mozgas(Rectangle _objektum , Level _level, Grid _grid)
         {
             Objektum = _objektum;
             level = _level;
+            grid = _grid;
 
-
-      
-           // backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            //backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.WorkerReportsProgress = true;
-
-            // backgroundWorker1.RunWorkerAsync(); //ezzel a szarral indul
-
+                        
             // what to do in the background thread
             backgroundWorker1.DoWork += new DoWorkEventHandler(
                 delegate (object o, DoWorkEventArgs args)
                 {
                     BackgroundWorker b = o as BackgroundWorker;
-                    int i = 0;
                     while (true)
                     {
-                        if (i == 60)
-                        {
-                            i = 0;
-                        }
-                        b.ReportProgress(i * 10);
-                        Thread.Sleep(100);
-
-                        i++;
+                        b.ReportProgress(0);
+                        Thread.Sleep(5);
                     }
                 });
 
@@ -52,24 +52,24 @@ namespace RageGame
                 backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(
                     delegate (object o, ProgressChangedEventArgs args)
                     {
-                        gravity();
+                        if (gravitacio)
+                        {
+                            gravity();
+                        }
+
+                        if (balra)
+                        {
+                            balra_mozog();
+                        } 
                     });
 
                 backgroundWorker1.RunWorkerAsync();
 
-        }
-
-
- 
-
-
-
-
-
+        }              
+        
         private void gravity()
         {
-          //  progressBar1.Value = e.ProgressPercentage;
-
+            lebeg = false;
 
             double ObjectTop = Objektum.Margin.Top;
             double ObjectButtom = ObjectTop + Objektum.Height;
@@ -81,17 +81,58 @@ namespace RageGame
 
             Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
             Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
-
-
-            if (LeftBlok.Gravity && RightBlok.Gravity)
+            
+            if (!LeftBlok.Szilard && !RightBlok.Szilard)
             {
-                    Objektum.Margin = new System.Windows.Thickness(ObjectLeft, ObjectTop + 5, 0, 0);
+                lebeg = true;
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 1, 0, 0);
             }
-
-
-
         }
-    
+
+        private void balra_mozog()
+        {
+            balra = false;
+
+            double ObjectTop = Objektum.Margin.Top;
+            double ObjectButtom = ObjectTop + Objektum.Height;
+            double ObjectLeft = Objektum.Margin.Left;
+            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
+            int LeftGrid = (int)ObjectLeft / 60;
+            int RightGrid = (int)ObjectRight / 60;
+            int ButtomGrid = (int)ObjectButtom / 60;
+            double LevelLeft = grid.Margin.Left;
+
+            Blok LeftBlok;
+            if (ButtomGrid - 1 < 0 || LeftGrid - 1 < 0)
+                LeftBlok = new Blok_levego();
+            else 
+                if (lebeg)
+                    LeftBlok = level.BlokList[ButtomGrid][LeftGrid - 1];
+                else                   
+                    LeftBlok = level.BlokList[ButtomGrid - 1][LeftGrid - 1];
+
+            Blok LeftBlokUP;
+            if (ButtomGrid - 2 < 0 || LeftGrid - 1 < 0)
+                LeftBlokUP = new Blok_levego();
+            else
+                if (lebeg)
+                    LeftBlokUP = level.BlokList[ButtomGrid - 1][LeftGrid - 1];
+                else
+                    LeftBlokUP = level.BlokList[ButtomGrid - 2][LeftGrid - 1];
+
+            
+            if (ObjectLeft -10 < LeftGrid * 60 && ( LeftBlok.Szilard || LeftBlokUP.Szilard))
+            {
+                return;
+            }
+            
+            if (ObjectLeft > 30)
+                Objektum.Margin = new Thickness(ObjectLeft -10, ObjectTop, 0, 0);
+
+            if (LevelLeft < 0 & ObjectRight <= 970)
+                grid.Margin = new Thickness(LevelLeft + 10, 0, 0, 0);
+                                    
+        }
 
 
     }
