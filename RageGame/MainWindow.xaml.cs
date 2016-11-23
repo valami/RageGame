@@ -55,10 +55,7 @@ namespace RageGame
             double grid_left = g.Margin.Left;
             double kekszar_left = kekSzar.Margin.Left;
             double kekszar_top = kekSzar.Margin.Top;
-
-
-
-          //  label.Content = kekszar_left + "\n" + grid_left; 
+            
 
             //Balra
             if (e.Key == Key.Left)
@@ -104,17 +101,7 @@ namespace RageGame
                     kekSzar.Margin = new Thickness(kekszar_left, kekszar_top + 10, 0, 0);
                 }
             }
-            debug();
         }
 
-        private void debug()
-        {
-            //double grid_left = g.Margin.Left;
-            double kekszar_left = kekSzar.Margin.Left;
-            double kekszar_top = kekSzar.Margin.Top;
-
-           // label.Content = kekszar_left + "\n" + grid_left *-1 
-          //      +"\n" +window.Width;
-        }
     }  
 }

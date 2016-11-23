@@ -13,6 +13,7 @@ namespace RageGame
 
         public Level(string nev)
         {
+            BlokList = new List<List<Blok>>();
             racs = new Grid();
             LoadMap(nev);
             MakeGrid();                    
@@ -21,11 +22,13 @@ namespace RageGame
 
         private void LoadMap(string nev)
         {
-            StreamReader sr = new StreamReader(nev);
-            int o = 0;
-            while (!sr.EndOfStream)
+           StreamReader sr = new StreamReader(nev);
+           int o = 0;
+           while (!sr.EndOfStream)
+
             {
                 string sor = sr.ReadLine();
+
                 string[] blok = sor.Split(',');
                 if (o == 0)
                     hossz = blok.Length;
@@ -75,6 +78,10 @@ namespace RageGame
 
                     i++;
                 }
+                
+
+                BlokList.Add(sorlista);
+
                 o++;
             }
         }
