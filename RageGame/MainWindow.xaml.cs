@@ -42,7 +42,7 @@ namespace RageGame
             kekSzar.Height = 100;
             kekSzar.VerticalAlignment = VerticalAlignment.Top;
             kekSzar.Width = 50;
-            kekSzar.Margin = new Thickness(35, 10, 0, 0);
+            kekSzar.Margin = new Thickness(31, 10, 0, 0);
             kekSzar.SetValue(Grid.RowSpanProperty, 200);
             kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
             this.Content = egy.racs;
@@ -71,18 +71,7 @@ namespace RageGame
             //Jobbra
             if (e.Key == Key.Right)
             {
-
-                //simán jobbra
-                if (kekszar_left + kekSzar.Width < windowright - 40)
-                {
-                    kekSzar.Margin = new Thickness(kekszar_left + 10 , kekszar_top, 0, 0); 
-                }
-                //kék szar jobbra, grid balra
-                else if (grid_left > g.Width * -1 + window.Width + 20)
-                {
-                    g.Margin = new Thickness(grid_left-10, 0, 0, 0);
-                    kekSzar.Margin = new Thickness(kekszar_left + 10, kekszar_top, 0, 0);
-                }
+                m.Jobbra();
             }
 
             //Fel
@@ -90,7 +79,7 @@ namespace RageGame
             {
                 if (kekszar_top > 30)
                 {
-                    kekSzar.Margin = new Thickness(kekszar_left, kekszar_top - 100, 0, 0);
+                    kekSzar.Margin = new Thickness(kekszar_left, kekszar_top - 200, 0, 0);
                 }
             }
 
