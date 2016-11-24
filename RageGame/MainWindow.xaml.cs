@@ -77,10 +77,7 @@ namespace RageGame
             //Fel
             if (e.Key == Key.Up)
             {
-                if (kekszar_top > 30)
-                {
-                    kekSzar.Margin = new Thickness(kekszar_left, kekszar_top - 200, 0, 0);
-                }
+                m.Jump();
             }
 
             //Le - nem fog kelleni ott a gravitáció

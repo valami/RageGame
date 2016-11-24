@@ -35,7 +35,7 @@ namespace RageGame
         }
         public void Jump()
         {
-            if (lebeg && jump > 0)
+            if (jump == 0)
             {
                 jump = 16;
                 gravitacio = false;
@@ -265,23 +265,25 @@ namespace RageGame
 
             Blok LeftBlok;
             Blok RightBlok;
-            if (ButtomGrid + 3 > 10)
+            if (ButtomGrid - 3 < 0)
             {
                 LeftBlok = new Blok_levego();
                 RightBlok = new Blok_levego();
             }
             else
             {
-                LeftBlok = level.BlokList[ButtomGrid + 3][LeftGrid];
-                RightBlok = level.BlokList[ButtomGrid + 3][RightGrid];
+                LeftBlok = level.BlokList[ButtomGrid - 3][LeftGrid];
+                RightBlok = level.BlokList[ButtomGrid - 3][RightGrid];
             }
 
 
 
-            if (!LeftBlok.Szilard && !RightBlok.Szilard)
+            if (LeftBlok.Szilard && RightBlok.Szilard)
             {
-                Objektum.Margin = new Thickness(ObjectLeft, (ButtomGrid * 3) - 1, 0, 0);
-                
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - 19, 0, 0);
+                jump = 0;
+                gravitacio = true;
+                return;
             }
 
 
