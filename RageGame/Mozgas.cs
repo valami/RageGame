@@ -35,9 +35,27 @@ namespace RageGame
         }
         public void Jump()
         {
+            double ObjectTop = Objektum.Margin.Top;
+            double ObjectButtom = ObjectTop + Objektum.Height;
+            double ObjectLeft = Objektum.Margin.Left;
+            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
+            int LeftGrid = (int)ObjectLeft / 60;
+            int RightGrid = (int)ObjectRight / 60;
+            int ButtomGrid = (int)ObjectButtom / 60;
+            Blok BLeftBlok;
+            Blok BRightBlok;
+            BLeftBlok = level.BlokList[ButtomGrid][LeftGrid];
+            BRightBlok = level.BlokList[ButtomGrid][RightGrid];
+
+            if (!BLeftBlok.Szilard && !BRightBlok.Szilard)
+            {
+                gravitacio = true;
+                jump = 0;
+                return;
+            }
             if (jump == 0)
             {
-                jump = 16;
+                jump = 22;
                 gravitacio = false;
             }
         }
@@ -263,22 +281,32 @@ namespace RageGame
             int RightGrid = (int)ObjectRight / 60;
             int ButtomGrid = (int)ObjectButtom / 60;
 
-            Blok LeftBlok;
-            Blok RightBlok;
+            Blok TLeftBlok;
+            Blok TRightBlok;
+            Blok BLeftBlok;
+            Blok BRightBlok;
             if (ButtomGrid - 3 < 0)
             {
-                LeftBlok = new Blok_levego();
-                RightBlok = new Blok_levego();
+                TLeftBlok = new Blok_levego();
+                TRightBlok = new Blok_levego();
             }
             else
             {
-                LeftBlok = level.BlokList[ButtomGrid - 3][LeftGrid];
-                RightBlok = level.BlokList[ButtomGrid - 3][RightGrid];
+                TLeftBlok = level.BlokList[ButtomGrid - 3][LeftGrid];
+                TRightBlok = level.BlokList[ButtomGrid - 3][RightGrid];
             }
 
+            BLeftBlok = level.BlokList[ButtomGrid][LeftGrid];
+            BRightBlok = level.BlokList[ButtomGrid][RightGrid];
+            /*
+            if (!BLeftBlok.Szilard || !BRightBlok.Szilard)
+            {
+                gravitacio = true;
+                jump = 0;
+                return;
+            }*/
 
-
-            if (LeftBlok.Szilard && RightBlok.Szilard)
+            if (TLeftBlok.Szilard || TRightBlok.Szilard)
             {
                 Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - 19, 0, 0);
                 jump = 0;
