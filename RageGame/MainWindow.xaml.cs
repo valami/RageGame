@@ -18,50 +18,20 @@ namespace RageGame
 
     public partial class MainWindow : Window
     {
-        double windowleft, windowright, windowtop, windowbottom;
         Level egy;
         Rectangle kekSzar;
         Mozgas m;
         Grid g;
 
-
         public MainWindow()
         {
             InitializeComponent();
-            Thickness windowki = window.Margin;
-            windowtop = windowki.Top;
-            windowbottom = window.Height;
-            windowright = window.Width;
 
-            egy = new Level("lvl1.txt");
-            #region kekszar
-            kekSzar = new Rectangle();
-            kekSzar.Name = "kekSzar";
-            kekSzar.Fill = Brushes.Blue;
-            kekSzar.HorizontalAlignment = HorizontalAlignment.Left;
-            kekSzar.Height = 100;
-            kekSzar.VerticalAlignment = VerticalAlignment.Top;
-            kekSzar.Width = 50;
-            kekSzar.Margin = new Thickness(31, 10, 0, 0);
-            kekSzar.SetValue(Grid.RowSpanProperty, 200);
-            kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
-            this.Content = egy.racs;
 
-            g = (this.Content as Grid);
-            g.Children.Add(kekSzar);
-            #endregion
-
-            m = new Mozgas(kekSzar, egy , g);
         }
 
         private void grid1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            double grid_left = g.Margin.Left;
-            double kekszar_left = kekSzar.Margin.Left;
-            double kekszar_top = kekSzar.Margin.Top;
-            
-
+        {          
             //Balra
             if (e.Key == Key.Left)
             {
@@ -80,15 +50,40 @@ namespace RageGame
                 m.Jump();
             }
 
-            //Le - nem fog kelleni ott a gravitáció
-            if (e.Key == Key.Down)
-            {               
-                if (kekszar_top + kekSzar.Width < window.Height )
-                {   
-                    kekSzar.Margin = new Thickness(kekszar_left, kekszar_top + 10, 0, 0);
-                }
-            }
+
+            if (e.Key == Key.Escape)
+                Close();
+
+
+            if (e.Key == Key.Enter)
+                m.debug = !m.debug;
         }
 
+        private void Loadeded(object sender, RoutedEventArgs e)
+        {
+            Meretezes.Szamol(this);
+
+            egy = new Level("lvl1.txt");
+
+            #region kekszar
+            kekSzar = new Rectangle();
+            kekSzar.Name = "kekSzar";
+            kekSzar.Fill = Brushes.Blue;
+            kekSzar.HorizontalAlignment = HorizontalAlignment.Left;
+            kekSzar.Height = Meretezes.playermag;
+            kekSzar.Width = Meretezes.playerszell;
+            kekSzar.VerticalAlignment = VerticalAlignment.Top;
+
+            kekSzar.Margin = new Thickness(31, 10, 0, 0);
+            kekSzar.SetValue(Grid.RowSpanProperty, 200);
+            kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
+            this.Content = egy.racs;
+
+            g = (this.Content as Grid);
+            g.Children.Add(kekSzar);
+            #endregion
+
+            m = new Mozgas(kekSzar, egy, g);
+        } 
     }  
 }

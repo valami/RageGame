@@ -40,7 +40,7 @@ namespace RageGame
                     if (o == 0)
                     {
                         ColumnDefinition a = new ColumnDefinition();
-                        a.Width = new GridLength(60);
+                        a.Width = new GridLength(Meretezes.blok);
                         racs.ColumnDefinitions.Add(a);
                     }
 
@@ -91,14 +91,14 @@ namespace RageGame
             racs.Name = "racs";
             racs.HorizontalAlignment = HorizontalAlignment.Left;
             racs.VerticalAlignment = VerticalAlignment.Top;
-            racs.Height = 600;
+            racs.Height = Meretezes.ablakmag;
             racs.Margin = new Thickness(0, 0, 0, 0);
-            racs.Width = hossz * 60;
+            racs.Width = hossz * Meretezes.blok;
 
             for (int i = 0; i < 11; i++)
             {
                 RowDefinition a = new RowDefinition();
-                a.Height = new GridLength(60);
+                a.Height = new GridLength(Meretezes.blok);
                 racs.RowDefinitions.Add(a);
             }
         }

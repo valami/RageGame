@@ -7,8 +7,8 @@ namespace RageGame
 {
     abstract class Blok
     {
-        protected int height = 60;
-        protected int width = 60;
+        protected int height =(int) Meretezes.blok;
+        protected int width = (int) Meretezes.blok;
         protected int row;
         protected int col;
         protected ImageBrush hatter = new ImageBrush();

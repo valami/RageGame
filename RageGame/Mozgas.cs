@@ -17,7 +17,11 @@ namespace RageGame
         bool balra = false , jobbra = false ;
         bool lebeg = true;
         int jump = 0;
-        
+        double ObjectTop, ObjectButtom, ObjectLeft, ObjectRight;
+        int LeftGrid, RightGrid, ButtomGrid , Sebesseg , Bloksize;
+        public bool debug = false;
+
+
         private Rectangle Objektum;
         private Level level;
         private Grid grid;
@@ -35,13 +39,7 @@ namespace RageGame
         }
         public void Jump()
         {
-            double ObjectTop = Objektum.Margin.Top;
-            double ObjectButtom = ObjectTop + Objektum.Height;
-            double ObjectLeft = Objektum.Margin.Left;
-            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
-            int LeftGrid = (int)ObjectLeft / 60;
-            int RightGrid = (int)ObjectRight / 60;
-            int ButtomGrid = (int)ObjectButtom / 60;
+            Szamol();
             Blok BLeftBlok;
             Blok BRightBlok;
             BLeftBlok = level.BlokList[ButtomGrid][LeftGrid];
@@ -59,6 +57,8 @@ namespace RageGame
                 gravitacio = false;
             }
         }
+
+
         #endregion
 
         public Mozgas(Rectangle _objektum , Level _level, Grid _grid)
@@ -108,39 +108,39 @@ namespace RageGame
             #endregion
         }
 
+        private void Szamol()
+        {
+            ObjectTop = Objektum.Margin.Top;
+            ObjectButtom = ObjectTop + Objektum.Height;
+            ObjectLeft = Objektum.Margin.Left;
+            ObjectRight = Objektum.Margin.Left + Objektum.Width;
+            Bloksize = (int) Meretezes.blok;
+            LeftGrid = (int)ObjectLeft / Bloksize;
+            RightGrid = (int)ObjectRight / Bloksize;
+            ButtomGrid = (int)ObjectButtom / Bloksize;
+            Sebesseg = Bloksize / 6;
+
+        }
+
         private void gravity()
         {
+            Szamol();
             lebeg = false;
-
-            double ObjectTop = Objektum.Margin.Top;
-            double ObjectButtom = ObjectTop + Objektum.Height;
-            double ObjectLeft = Objektum.Margin.Left;
-            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
-            int LeftGrid =   (int) ObjectLeft / 60;
-            int RightGrid = (int)ObjectRight / 60;
-            int ButtomGrid = (int) ObjectButtom / 60;
-
             Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
             Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
             
             if (!LeftBlok.Szilard && !RightBlok.Szilard)
             {
                 lebeg = true;
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 1, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + Sebesseg /10, 0, 0);
             }
         }
 
         private void balra_mozog()
         {
+            Szamol();
             balra = false;
 
-            double ObjectTop = Objektum.Margin.Top;
-            double ObjectButtom = ObjectTop + Objektum.Height;
-            double ObjectLeft = Objektum.Margin.Left;
-            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
-            int LeftGrid = (int)ObjectLeft / 60;
-            int RightGrid = (int)ObjectRight / 60;
-            int ButtomGrid = (int)ObjectButtom / 60;
             double LevelLeft = grid.Margin.Left;
 
             Blok LeftBlok;
@@ -172,39 +172,34 @@ namespace RageGame
 
             if (lebeg)
             {
-                if (ObjectLeft - 10 < LeftGrid * 60 && (LeftBlok.Szilard || LeftBlokUP.Szilard || LeftBlokUPUP.Szilard))
+                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (LeftBlok.Szilard || LeftBlokUP.Szilard || LeftBlokUPUP.Szilard))
                 {
-                    Objektum.Margin = new Thickness(LeftGrid * 60 + 1 , ObjectTop, 0, 0);
+                    Objektum.Margin = new Thickness(LeftGrid * Bloksize + 1 , ObjectTop, 0, 0);
                     return;
                 }
             }
             else
             {
-                if (ObjectLeft - 10 < LeftGrid * 60 && (LeftBlok.Szilard || LeftBlokUP.Szilard))
+                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (LeftBlok.Szilard || LeftBlokUP.Szilard))
                 {
-                    Objektum.Margin = new Thickness(LeftGrid * 60 + 1, ObjectTop, 0, 0);
+                    Objektum.Margin = new Thickness(LeftGrid * Bloksize + 1, ObjectTop, 0, 0);
                     return;
                 }
             }
             
             if (ObjectLeft > 30)
-                Objektum.Margin = new Thickness(ObjectLeft -10, ObjectTop, 0, 0);
+               Objektum.Margin = new Thickness(ObjectLeft - Sebesseg, ObjectTop, 0, 0);
 
-            if (LevelLeft < 0 & ObjectRight <= 970)
-                grid.Margin = new Thickness(LevelLeft + 10, 0, 0, 0);                                    
+            if (LevelLeft < 0 & ObjectRight <= Meretezes.ablakhossz)
+               grid.Margin = new Thickness(LevelLeft + Sebesseg, 0, 0, 0);                                    
         }
 
         private void jobbra_mozog()
         {
+            Szamol();
             jobbra = false;
 
-            double ObjectTop = Objektum.Margin.Top;
-            double ObjectButtom = ObjectTop + Objektum.Height;
-            double ObjectLeft = Objektum.Margin.Left;
-            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
-            int LeftGrid = (int)ObjectLeft / 60;
-            int RightGrid = (int)ObjectRight / 60;
-            int ButtomGrid = (int)ObjectButtom / 60;
+
             double LevelLeft = grid.Margin.Left;
             
             Blok RightBlok;
@@ -237,30 +232,33 @@ namespace RageGame
 
             if (lebeg)
             {
-                if (ObjectRight + 10 > (LeftGrid + 1) * 60 && (RightBlok.Szilard || RightBlokUP.Szilard || RightBlokUPUP.Szilard))
+                if (ObjectRight + Sebesseg > (LeftGrid + 1) * Bloksize && (RightBlok.Szilard || RightBlokUP.Szilard || RightBlokUPUP.Szilard))
                 {
-                    Objektum.Margin = new Thickness(((LeftGrid + 1) * 60) - 1 - Objektum.Width, ObjectTop, 0, 0);
+                    Objektum.Margin = new Thickness(((LeftGrid + 1) * Bloksize) - 1 - Objektum.Width, ObjectTop, 0, 0);
                     return;
                 }
             }
             else
             {
-                if (ObjectRight + 10 > (LeftGrid + 1) * 60 && (RightBlok.Szilard || RightBlokUP.Szilard))
+                if (ObjectRight + Sebesseg > (LeftGrid + 1) * Bloksize && (RightBlok.Szilard || RightBlokUP.Szilard))
                 {
-                    Objektum.Margin = new Thickness(((LeftGrid + 1) * 60) - 1 - Objektum.Width, ObjectTop, 0, 0);
+                    Objektum.Margin = new Thickness(((LeftGrid + 1) * Bloksize) - 1 - Objektum.Width, ObjectTop, 0, 0);
                     return;
                 }
             }
-
-
-            if (ObjectRight > 900 - LevelLeft && ObjectLeft < ((level.BlokList[ButtomGrid].Count -2 )* 60 ) - 50)
+            if (debug)
             {
-                grid.Margin = new Thickness(LevelLeft - 10, 0, 0, 0);
-                Objektum.Margin = new Thickness(ObjectLeft + 10, ObjectTop, 0, 0);
+                int i = 1 - 1;
             }
-            else if (ObjectRight < 900 - LevelLeft)
+
+            if (ObjectRight > Meretezes.ablakhossz - Meretezes.ablakhossz /4 - LevelLeft && ObjectLeft < ((level.BlokList[ButtomGrid].Count - 2 )* Bloksize) )
             {
-                Objektum.Margin= new Thickness(ObjectLeft + 10, ObjectTop, 0, 0);
+                grid.Margin = new Thickness(LevelLeft - Sebesseg, 0, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft + Sebesseg, ObjectTop, 0, 0);
+            }
+            else if (ObjectRight < Meretezes.ablakhossz -100 - LevelLeft)
+            {
+                Objektum.Margin= new Thickness(ObjectLeft + Sebesseg, ObjectTop, 0, 0);
             }
 
 
@@ -268,18 +266,11 @@ namespace RageGame
 
         private void ugor()
         {
+            Szamol();
             jump--;
             lebeg = true;
             if (jump == 0)
-                gravitacio = true;
-
-            double ObjectTop = Objektum.Margin.Top;
-            double ObjectButtom = ObjectTop + Objektum.Height;
-            double ObjectLeft = Objektum.Margin.Left;
-            double ObjectRight = Objektum.Margin.Left + Objektum.Width;
-            int LeftGrid = (int)ObjectLeft / 60;
-            int RightGrid = (int)ObjectRight / 60;
-            int ButtomGrid = (int)ObjectButtom / 60;
+                gravitacio = true;  
 
             Blok TLeftBlok;
             Blok TRightBlok;
@@ -308,7 +299,7 @@ namespace RageGame
 
             if (TLeftBlok.Szilard || TRightBlok.Szilard)
             {
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - 19, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Bloksize * 0.4 , 0, 0); //0.4 = 2 * 0.2
                 jump = 0;
                 gravitacio = true;
                 return;
@@ -317,7 +308,7 @@ namespace RageGame
 
             if (ObjectTop > 30)
             {
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - 10, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Sebesseg, 0, 0);
             }
 
 
