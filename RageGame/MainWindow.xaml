@@ -7,4 +7,4 @@
         mc:Ignorable="d"
         Title="Rage Game"  KeyDown="grid1_KeyDown" 
         WindowStyle="None" ResizeMode="NoResize"  
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Loadeded"/>
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Loadeded" KeyUp="window_KeyUp"/>

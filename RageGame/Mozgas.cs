@@ -14,7 +14,7 @@ namespace RageGame
 {
     class Mozgas
     {
-        List<Border> trukkoslisa = new List<Border>();
+
         bool gravitacio = true;
         bool balra = false , jobbra = false ;
         bool lebeg = true;
@@ -49,7 +49,7 @@ namespace RageGame
             if (!BLeftBlok.Szilard && !BRightBlok.Szilard)
             {
                 gravitacio = true;
-                jump = 0;
+               // jump = 0;
                 return;
             }
             if (jump == 0)
@@ -76,7 +76,7 @@ namespace RageGame
                     while (true)
                     {
                         b.ReportProgress(0);
-                        Thread.Sleep(5);
+                        Thread.Sleep(1);
                     }
                 });
 
@@ -118,7 +118,7 @@ namespace RageGame
             LeftGrid = (int)ObjectLeft / Bloksize;
             RightGrid = (int)ObjectRight / Bloksize;
             ButtomGrid = (int)ObjectButtom / Bloksize;
-            Sebesseg = Bloksize / 6;
+            Sebesseg = Bloksize / 6 ;
 
         }
 
@@ -151,7 +151,7 @@ namespace RageGame
             if (!LeftBlok.Szilard && !RightBlok.Szilard)
             {
                 lebeg = true;
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + Sebesseg /7, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 1, 0, 0);
             }
         }
 
@@ -289,7 +289,10 @@ namespace RageGame
             jump--;
             lebeg = true;
             if (jump == 0)
-                gravitacio = true;  
+            {
+                gravitacio = true;
+            }
+
 
             Blok TLeftBlok;
             Blok TRightBlok;
@@ -324,14 +327,10 @@ namespace RageGame
                 return;
             }
 
-
             if (ObjectTop > 30)
             {
                 Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Sebesseg, 0, 0);
             }
-
-
-
         }
 
         private void trukkos(int _row , int _col)

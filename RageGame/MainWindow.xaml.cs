@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +20,8 @@ namespace RageGame
 
     public partial class MainWindow : Window
     {
+        List<Key> _pressedKeys = new List<Key>();
+        BackgroundWorker backgroundWorker1 = new BackgroundWorker();
         Level egy;
         Rectangle kekSzar;
         Mozgas m;
@@ -26,29 +30,18 @@ namespace RageGame
         public MainWindow()
         {
             InitializeComponent();
-
-
+            PrintKeys();
         }
 
         private void grid1_KeyDown(object sender, KeyEventArgs e)
         {
-            //Balra
-            if (Keyboard.IsKeyDown(Key.A))
-            {
-                m.Balra();
-            }
+            if (_pressedKeys.Contains(e.Key))
+                return;
+            _pressedKeys.Add(e.Key);
 
-            //Jobbra
-            if (Keyboard.IsKeyDown(Key.D))
-            {
-                m.Jobbra();
-            }
 
-            //Fel
-            if (Keyboard.IsKeyDown(Key.W))
-            {
-                m.Jump();
-            }
+
+            e.Handled = true;
 
 
             if (e.Key == Key.Escape)
@@ -84,6 +77,51 @@ namespace RageGame
             #endregion
 
             m = new Mozgas(kekSzar, egy, g);
-        } 
+        }
+
+
+        private void PrintKeys()
+        {
+
+            #region BackgroundWorker
+            backgroundWorker1.WorkerReportsProgress = true;
+            // what to do in the background thread
+            backgroundWorker1.DoWork += new DoWorkEventHandler(
+            delegate (object o, DoWorkEventArgs args)
+            {
+                BackgroundWorker b = o as BackgroundWorker;
+                while (true)
+                {
+                    b.ReportProgress(0);
+                    Thread.Sleep(50);
+                }
+            });
+
+            // what to do when progress changed 
+            backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(
+                delegate (object o, ProgressChangedEventArgs args)
+                {
+                    foreach (Key key in _pressedKeys)
+                    {
+                        if (key == Key.W)
+                            m.Jump();
+                        if (key == Key.A)
+                            m.Balra();
+                        if (key == Key.D)
+                            m.Jobbra();
+                    }
+                });
+
+            backgroundWorker1.RunWorkerAsync();
+            #endregion
+
+
+        }
+
+        private void window_KeyUp(object sender, KeyEventArgs e)
+        {
+            _pressedKeys.Remove(e.Key);
+            e.Handled = true;
+        }
     }  
 }
