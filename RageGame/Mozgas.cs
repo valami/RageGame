@@ -7,12 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Shapes;
 
 namespace RageGame
 {
     class Mozgas
     {
+        List<Border> trukkoslisa = new List<Border>();
         bool gravitacio = true;
         bool balra = false , jobbra = false ;
         bool lebeg = true;
@@ -20,7 +22,6 @@ namespace RageGame
         double ObjectTop, ObjectButtom, ObjectLeft, ObjectRight;
         int LeftGrid, RightGrid, ButtomGrid , Sebesseg , Bloksize;
         public bool debug = false;
-
 
         private Rectangle Objektum;
         private Level level;
@@ -56,9 +57,7 @@ namespace RageGame
                 jump = 22;
                 gravitacio = false;
             }
-        }
-
-
+        }        
         #endregion
 
         public Mozgas(Rectangle _objektum , Level _level, Grid _grid)
@@ -102,6 +101,7 @@ namespace RageGame
                         {
                             ugor();
                         }
+                        aktival();
                     });
 
                 backgroundWorker1.RunWorkerAsync();
@@ -120,6 +120,23 @@ namespace RageGame
             ButtomGrid = (int)ObjectButtom / Bloksize;
             Sebesseg = Bloksize / 6;
 
+        }
+
+        private void aktival()
+        {
+           // Szamol();
+
+            Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
+            Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
+
+            if (LeftBlok.Trukkos)
+            {
+             //   trukkos(ButtomGrid, LeftGrid);
+            }
+            if (RightBlok.Trukkos)
+            {
+              //9  trukkos(ButtomGrid, RightGrid);
+            }
         }
 
         private void gravity()
@@ -313,6 +330,16 @@ namespace RageGame
 
 
 
+        }
+
+        private void trukkos(int _row , int _col)
+        {
+            var element = grid.Children
+                .OfType<FrameworkElement>()
+                .FirstOrDefault(e => e.Name =="b" + _row + "_" + _col);
+            grid.Children.Remove(element);
+            level.BlokList[_row][_col].aktivacio();
+            grid.Children.Add(level.BlokList[_row][_col].border());
         }
     }
 }

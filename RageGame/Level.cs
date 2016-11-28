@@ -16,8 +16,7 @@ namespace RageGame
             BlokList = new List<List<Blok>>();
             racs = new Grid();
             LoadMap(nev);
-            MakeGrid();                    
-
+            MakeGrid();                   
         }
 
         private void LoadMap(string nev)
@@ -47,41 +46,43 @@ namespace RageGame
                     if (item == "k")
                     {
                         Blok b = new Blok_ko(o, i);
-                        racs.Children.Add(b.border());
+                        Border c = b.border();
+                        racs.Children.Add(c);
                         sorlista.Add(b);
                     }
 
                     else if (item == "f")
                     {
                         Blok b = new Blok_fold(o, i);
-                        racs.Children.Add(b.border());
+                        Border c = b.border();
+                        racs.Children.Add(c);
                         sorlista.Add(b);
                     }
                     else if (item == "l")
                     {
                         Blok b = new Blok_levego(o, i);
-                        racs.Children.Add(b.border());
+                        Border c = b.border();
+                        racs.Children.Add(c);
                         sorlista.Add(b);
                     }
                     else if (item == "c")
                     {
                         Blok b = new Blok_checkpoint(o, i);
-                        racs.Children.Add(b.border());
+                        Border c = b.border();
+                        racs.Children.Add(c);
                         sorlista.Add(b);
                     }
                     else if (item == "t")
                     {
                         Blok b = new Blokk_trukkosFold(o, i);
-                        racs.Children.Add(b.border());
+                        Border c = b.border();
+                        racs.Children.Add(c);
                         sorlista.Add(b);
                     }
-
                     i++;
-                }
-                
+                }                
 
                 BlokList.Add(sorlista);
-
                 o++;
             }
         }

@@ -12,8 +12,8 @@ namespace RageGame
         protected int row;
         protected int col;
         protected ImageBrush hatter = new ImageBrush();
-
-        bool szilard;
+        bool szilard , trukkos;
+        private string neve;
 
         public bool Szilard
         {
@@ -23,13 +23,31 @@ namespace RageGame
             }
         }
 
-        public Blok(int row , int col , string kep , bool szilard)
+        public bool Trukkos
         {
+            get
+            {
+                return szilard;
+            }
+        }
+
+        protected string Neve
+        {
+            get
+            {
+                return neve;
+            }
+        }
+
+        public Blok(int row , int col , string kep , bool szilard , bool trukkos)
+        {
+            this.trukkos = trukkos;
             this.szilard = szilard;
             this.row = row;
             this.col = col;
             if (kep != null)
               hatter = setHatter(kep);
+            neve = "b" + row + "_" + col;
         }
 
         public Border border()
@@ -41,16 +59,20 @@ namespace RageGame
             b.SetValue(Grid.RowProperty, row);
             b.SetValue(Grid.ColumnProperty, col);
             b.Background = this.hatter;
-
+            b.Name = Neve;
             return b;
         }
 
-        private ImageBrush setHatter(string kep)
+        protected ImageBrush setHatter(string kep)
         {
             ImageBrush myBrush = new ImageBrush();
             myBrush.ImageSource =
                 new BitmapImage(new Uri("pack://application:,,,/" + kep, UriKind.Absolute));
             return myBrush;
+        }
+        public void aktivacio()
+        {
+            return;
         }
     }
 }
