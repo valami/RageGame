@@ -13,7 +13,9 @@ namespace RageGame
         protected int col;
         protected ImageBrush hatter = new ImageBrush();
         bool szilard , trukkos;
+        bool aktivalt = true;
         private string neve;
+        string vegkep = null;
 
         public bool Szilard
         {
@@ -39,6 +41,29 @@ namespace RageGame
             }
         }
 
+        public bool Aktivalt
+        {
+            get
+            {
+                return aktivalt;
+            }
+
+            set
+            {
+                aktivalt = value;
+            }
+        }
+
+        protected string Vegkep
+        {
+
+
+            set
+            {
+                vegkep = value;
+            }
+        }
+
         public Blok(int row , int col , string kep , bool szilard , bool trukkos)
         {
             this.trukkos = trukkos;
@@ -48,6 +73,11 @@ namespace RageGame
             if (kep != null)
               hatter = setHatter(kep);
             neve = "b" + row + "_" + col;
+
+            if (trukkos)
+            {
+                aktivalt = false;
+            }
         }
 
         public Border border()
@@ -62,17 +92,35 @@ namespace RageGame
             b.Name = Neve;
             return b;
         }
+        public Border border_end()
+        {
+            if (vegkep == null)
+                return border();
+            Border b = new Border();
+
+            b.Height = this.height;
+            b.Width = this.width;
+            b.SetValue(Grid.RowProperty, row);
+            b.SetValue(Grid.ColumnProperty, col);
+
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri("pack://application:,,,/" + vegkep, UriKind.Absolute));
+
+            b.Background = myBrush;
+            b.Name = Neve;
+            return b;
+        }
+
 
         protected ImageBrush setHatter(string kep)
         {
             ImageBrush myBrush = new ImageBrush();
             myBrush.ImageSource =
                 new BitmapImage(new Uri("pack://application:,,,/" + kep, UriKind.Absolute));
-            return myBrush;
+            return myBrush;          
         }
-        public void aktivacio()
-        {
-            return;
-        }
+
+
     }
 }

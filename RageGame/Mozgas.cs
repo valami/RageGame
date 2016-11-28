@@ -124,19 +124,21 @@ namespace RageGame
 
         private void aktival()
         {
-           // Szamol();
+            Szamol();
 
             Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
             Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
 
-            if (LeftBlok.Trukkos)
+            if (LeftBlok.Trukkos && !LeftBlok.Aktivalt)
             {
-             //   trukkos(ButtomGrid, LeftGrid);
+                LeftBlok.Aktivalt = true;
+                trukkos(ButtomGrid, LeftGrid);
             }
-            if (RightBlok.Trukkos)
-            {
-              //9  trukkos(ButtomGrid, RightGrid);
-            }
+           if (RightBlok.Trukkos && !RightBlok.Aktivalt)
+           {
+                RightBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+           }
         }
 
         private void gravity()
@@ -149,7 +151,7 @@ namespace RageGame
             if (!LeftBlok.Szilard && !RightBlok.Szilard)
             {
                 lebeg = true;
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + Sebesseg /10, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + Sebesseg /7, 0, 0);
             }
         }
 
@@ -338,8 +340,7 @@ namespace RageGame
                 .OfType<FrameworkElement>()
                 .FirstOrDefault(e => e.Name =="b" + _row + "_" + _col);
             grid.Children.Remove(element);
-            level.BlokList[_row][_col].aktivacio();
-            grid.Children.Add(level.BlokList[_row][_col].border());
+            grid.Children.Add(level.BlokList[_row][_col].border_end());
         }
     }
 }

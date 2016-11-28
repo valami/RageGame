@@ -63,12 +63,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Blok.cs" />
-    <Compile Include="Blokk_trukkosFold.cs" />
-    <Compile Include="Blok_checkpoint.cs" />
-    <Compile Include="Blok_fold.cs" />
-    <Compile Include="Blok_ko.cs" />
-    <Compile Include="Blok_levego.cs" />
+    <Compile Include="Blok\Blok.cs" />
+    <Compile Include="Blok\Blokk_trukkosFold.cs" />
+    <Compile Include="Blok\BlokTrukkos.cs" />
+    <Compile Include="Blok\Blok_checkpoint.cs" />
+    <Compile Include="Blok\Blok_fold.cs" />
+    <Compile Include="Blok\Blok_ko.cs" />
+    <Compile Include="Blok\Blok_levego.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

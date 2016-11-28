@@ -31,21 +31,21 @@ namespace RageGame
         }
 
         private void grid1_KeyDown(object sender, KeyEventArgs e)
-        {          
+        {
             //Balra
-            if (e.Key == Key.Left)
+            if (Keyboard.IsKeyDown(Key.A))
             {
                 m.Balra();
             }
 
             //Jobbra
-            if (e.Key == Key.Right)
+            if (Keyboard.IsKeyDown(Key.D))
             {
                 m.Jobbra();
             }
 
             //Fel
-            if (e.Key == Key.Up)
+            if (Keyboard.IsKeyDown(Key.W))
             {
                 m.Jump();
             }
