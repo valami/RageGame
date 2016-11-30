@@ -8,7 +8,7 @@ namespace RageGame
     {
         static string kep = "ko.jpg";
         static bool szilard = true;
-        static bool trukkos = false;
+        static int trukkos = 0;
         public Blok_ko(int row , int col) : base(row, col, kep, szilard,trukkos)
         {            
 

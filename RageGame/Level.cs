@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RageGame
 {
@@ -79,6 +80,14 @@ namespace RageGame
                         racs.Children.Add(c);
                         sorlista.Add(b);
                     }
+                    else if (item == "e")
+                    {
+                        Blok b = new BlokTrukkos(o, i,new Blok_fold(o,i),new Blok_levego());
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+
                     i++;
                 }                
 
@@ -95,6 +104,7 @@ namespace RageGame
             racs.Height = Meretezes.ablakmag;
             racs.Margin = new Thickness(0, 0, 0, 0);
             racs.Width = hossz * Meretezes.blok;
+            racs.Background = Brushes.LightSkyBlue ;
 
             for (int i = 0; i < 11; i++)
             {

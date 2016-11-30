@@ -54,7 +54,7 @@ namespace RageGame
             }
             if (jump == 0)
             {
-                jump = 22;
+                jump = 26;
                 gravitacio = false;
             }
         }        
@@ -128,17 +128,28 @@ namespace RageGame
 
             Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
             Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
-
-            if (LeftBlok.Trukkos && !LeftBlok.Aktivalt)
+            if (lebeg)
+            {
+                return;
+            }
+            if (LeftBlok.Trukkos == 1 && !LeftBlok.Aktivalt)
             {
                 LeftBlok.Aktivalt = true;
                 trukkos(ButtomGrid, LeftGrid);
+                return;
             }
-           if (RightBlok.Trukkos && !RightBlok.Aktivalt)
+           if (RightBlok.Trukkos == 1 && !RightBlok.Aktivalt)
            {
                 RightBlok.Aktivalt = true;
                 trukkos(ButtomGrid, RightGrid);
-           }
+                return;
+            }
+            if (RightGrid == LeftGrid && RightBlok.Trukkos == 2 && !RightBlok.Aktivalt)
+            {
+                RightBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                return;
+            }
         }
 
         private void gravity()

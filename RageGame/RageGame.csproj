@@ -64,7 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Blok\Blok.cs" />
-    <Compile Include="Blok\Blokk_trukkosFold.cs" />
+    <Compile Include="Blok\Blokk_TuskesFold.cs" />
     <Compile Include="Blok\BlokTrukkos.cs" />
     <Compile Include="Blok\Blok_checkpoint.cs" />
     <Compile Include="Blok\Blok_fold.cs" />

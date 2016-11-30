@@ -10,7 +10,7 @@ namespace RageGame
     {
         static string kep = "cp_down.jpg";
         static bool szilard = false;
-        static bool trukkos = false;
+        static int trukkos = 0;
         public Blok_checkpoint(int row, int col) : base(row, col, kep , szilard,trukkos)
         {
 

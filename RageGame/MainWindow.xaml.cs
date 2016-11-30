@@ -39,8 +39,6 @@ namespace RageGame
                 return;
             _pressedKeys.Add(e.Key);
 
-
-
             e.Handled = true;
 
 

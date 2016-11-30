@@ -5,9 +5,9 @@ namespace RageGame
 {
     class Blok_levego : Blok 
     {
-        static string kep = "levego.jpg";
+        static string kep = null;
         static bool szilard = false;
-        static bool trukkos = false;
+        static int trukkos = 0;
         public Blok_levego(int row, int col) : base(row, col, kep, szilard ,trukkos)
         {
 

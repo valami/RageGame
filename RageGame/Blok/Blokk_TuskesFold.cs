@@ -10,7 +10,7 @@ namespace RageGame
     {
         static string kep = "fold.jpg";
         static bool szilard = true;
-        static bool trukkos = true;
+        static int trukkos = 1;
         public Blokk_trukkosFold(int row, int col) : base(row, col, kep, szilard,trukkos)
         {
             this.Vegkep = "fold_trukkos.jpg"; 
