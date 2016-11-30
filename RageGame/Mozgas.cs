@@ -212,12 +212,25 @@ namespace RageGame
                     return;
                 }
             }
-            
-            if (ObjectLeft > 30)
-               Objektum.Margin = new Thickness(ObjectLeft - Sebesseg, ObjectTop, 0, 0);
 
-            if (LevelLeft < 0 & ObjectRight <= Meretezes.ablakhossz)
-               grid.Margin = new Thickness(LevelLeft + Sebesseg, 0, 0, 0);                                    
+           if (ObjectLeft - 50 < LevelLeft * -1)
+            {
+                return;
+            }
+            if (debug)
+            {
+                int i = 2;
+            }
+            else if (ObjectLeft > 30)
+            {
+                Objektum.Margin = new Thickness(ObjectLeft - Sebesseg, ObjectTop, 0, 0);
+
+            }
+
+
+           /* if (LevelLeft < 0 & ObjectRight <= Meretezes.ablakhossz)
+               grid.Margin = new Thickness(LevelLeft + Sebesseg, 0, 0, 0);    
+               */                                
         }
 
         private void jobbra_mozog()
