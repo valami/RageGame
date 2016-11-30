@@ -17,6 +17,7 @@ namespace RageGame
             BlokList = new List<List<Blok>>();
             racs = new Grid();
             LoadMap(nev);
+            LoadLabel(nev);
             MakeGrid();                   
         }
 
@@ -24,7 +25,7 @@ namespace RageGame
         {
            StreamReader sr = new StreamReader(nev);
            int o = 0;
-           while (!sr.EndOfStream)
+           while (o< 10)
 
             {
                 string sor = sr.ReadLine();
@@ -82,7 +83,14 @@ namespace RageGame
                     }
                     else if (item == "e")
                     {
-                        Blok b = new BlokTrukkos(o, i,new Blok_fold(o,i),new Blok_levego());
+                        Blok b = new BlokTrukkos(o, i,new Blok_fold(),new Blok_levego(),2);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+                    else if (item == "m")
+                    {
+                        Blok b = new BlokTrukkos(o, i,  new Blok_levego(), new Blok_fold(),3);
                         Border c = b.border();
                         racs.Children.Add(c);
                         sorlista.Add(b);
@@ -94,6 +102,11 @@ namespace RageGame
                 BlokList.Add(sorlista);
                 o++;
             }
+        }
+
+        private void LoadLabel(string nev)
+        {
+
         }
 
         private void MakeGrid()

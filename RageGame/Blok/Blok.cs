@@ -100,7 +100,7 @@ namespace RageGame
               hatter = setHatter(kep);
             neve = "b" + row + "_" + col;
 
-            if (trukkos== 0)
+            if (trukkos != 0)
             {
                 aktivalt = false;
             }

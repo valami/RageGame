@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace RageGame
@@ -18,7 +19,7 @@ namespace RageGame
         bool gravitacio = true;
         bool balra = false , jobbra = false ;
         bool lebeg = true;
-        int jump = 0;
+        int jump = 0 , jumpcd = 200;
         double ObjectTop, ObjectButtom, ObjectLeft, ObjectRight;
         int LeftGrid, RightGrid, ButtomGrid , Sebesseg , Bloksize;
         public bool debug = false;
@@ -40,7 +41,10 @@ namespace RageGame
         }
         public void Jump()
         {
+            if (jumpcd > 0)
+                return;
             Szamol();
+            jumpcd = 200;
             Blok BLeftBlok;
             Blok BRightBlok;
             BLeftBlok = level.BlokList[ButtomGrid][LeftGrid];
@@ -49,7 +53,6 @@ namespace RageGame
             if (!BLeftBlok.Szilard && !BRightBlok.Szilard)
             {
                 gravitacio = true;
-               // jump = 0;
                 return;
             }
             if (jump == 0)
@@ -85,23 +88,15 @@ namespace RageGame
                     delegate (object o, ProgressChangedEventArgs args)
                     {
                         if (gravitacio)
-                        {
                             gravity();
-                        }
-
                         if (balra)
-                        {
                             balra_mozog();
-                        }
                         if (jobbra)
-                        {
                             jobbra_mozog();
-                        }
                         if (jump > 0)
-                        {
                             ugor();
-                        }
-                        aktival();
+                        if (jumpcd != 0)
+                            --jumpcd;
                     });
 
                 backgroundWorker1.RunWorkerAsync();
@@ -118,38 +113,7 @@ namespace RageGame
             LeftGrid = (int)ObjectLeft / Bloksize;
             RightGrid = (int)ObjectRight / Bloksize;
             ButtomGrid = (int)ObjectButtom / Bloksize;
-            Sebesseg = Bloksize / 6 ;
-
-        }
-
-        private void aktival()
-        {
-            Szamol();
-
-            Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
-            Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
-            if (lebeg)
-            {
-                return;
-            }
-            if (LeftBlok.Trukkos == 1 && !LeftBlok.Aktivalt)
-            {
-                LeftBlok.Aktivalt = true;
-                trukkos(ButtomGrid, LeftGrid);
-                return;
-            }
-           if (RightBlok.Trukkos == 1 && !RightBlok.Aktivalt)
-           {
-                RightBlok.Aktivalt = true;
-                trukkos(ButtomGrid, RightGrid);
-                return;
-            }
-            if (RightGrid == LeftGrid && RightBlok.Trukkos == 2 && !RightBlok.Aktivalt)
-            {
-                RightBlok.Aktivalt = true;
-                trukkos(ButtomGrid, RightGrid);
-                return;
-            }
+            Sebesseg = Bloksize / 4 ;
         }
 
         private void gravity()
@@ -157,13 +121,45 @@ namespace RageGame
             Szamol();
             lebeg = false;
             Blok LeftBlok = level.BlokList[ButtomGrid][LeftGrid];
-            Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];
-            
+            Blok RightBlok = level.BlokList[ButtomGrid][RightGrid];            
             if (!LeftBlok.Szilard && !RightBlok.Szilard)
             {
                 lebeg = true;
                 Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 1, 0, 0);
+                return;
             }
+            #region It's a trap
+            //Balra tüskés
+            if (LeftBlok.Trukkos == 1 && !LeftBlok.Aktivalt)
+            {
+                LeftBlok.Aktivalt = true;
+                trukkos(ButtomGrid, LeftGrid);
+                return;
+            }
+            //Jobbra tüskés
+            if (RightBlok.Trukkos == 1 && !RightBlok.Aktivalt)
+            {
+                RightBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                return;
+            }
+            //Rajt áll
+            if (RightGrid == LeftGrid && RightBlok.Trukkos == 2 && !RightBlok.Aktivalt)
+            {
+                RightBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                return;
+            }
+            //Két eltűnőn áll
+            if (LeftBlok.Trukkos == 2 && RightBlok.Trukkos == 2 && (!RightBlok.Aktivalt || !LeftBlok.Aktivalt))
+            {
+                RightBlok.Aktivalt = true;
+                LeftBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                trukkos(ButtomGrid, LeftGrid);
+                return;
+            }
+            #endregion
         }
 
         private void balra_mozog()
@@ -276,10 +272,6 @@ namespace RageGame
                     return;
                 }
             }
-            if (debug)
-            {
-                int i = 1 - 1;
-            }
 
             if (ObjectRight > Meretezes.ablakhossz - Meretezes.ablakhossz /4 - LevelLeft && ObjectLeft < ((level.BlokList[ButtomGrid].Count - 2 )* Bloksize) )
             {
@@ -303,12 +295,12 @@ namespace RageGame
             {
                 gravitacio = true;
             }
-
-
+            
             Blok TLeftBlok;
             Blok TRightBlok;
             Blok BLeftBlok;
             Blok BRightBlok;
+
             if (ButtomGrid - 3 < 0)
             {
                 TLeftBlok = new Blok_levego();
@@ -319,38 +311,58 @@ namespace RageGame
                 TLeftBlok = level.BlokList[ButtomGrid - 3][LeftGrid];
                 TRightBlok = level.BlokList[ButtomGrid - 3][RightGrid];
             }
-
             BLeftBlok = level.BlokList[ButtomGrid][LeftGrid];
             BRightBlok = level.BlokList[ButtomGrid][RightGrid];
-            /*
-            if (!BLeftBlok.Szilard || !BRightBlok.Szilard)
-            {
-                gravitacio = true;
-                jump = 0;
-                return;
-            }*/
 
+            //Fejelésre aktiválódó blokk
+            if (TLeftBlok.Trukkos == 3)
+            {
+                TLeftBlok.Aktivalt = true;
+                trukkos(ButtomGrid - 3, LeftGrid);              
+            }
+            if (TRightBlok.Trukkos == 3)
+            {
+                TRightBlok.Aktivalt = true;
+                trukkos(ButtomGrid - 3, RightGrid);
+            }
+            //Fejelés
             if (TLeftBlok.Szilard || TRightBlok.Szilard)
             {
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Bloksize * 0.4 , 0, 0); //0.4 = 2 * 0.2
+                Objektum.Margin = new Thickness(ObjectLeft, (ButtomGrid - 2) * Bloksize + 1, 0, 0); //0.4 = 2 * 0.2
                 jump = 0;
                 gravitacio = true;
                 return;
             }
-
-            if (ObjectTop > 30)
+            //Pálya fölé ugrás
+            if (ObjectTop > 1)
             {
-                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Sebesseg, 0, 0);
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Sebesseg/1.5, 0, 0);
             }
         }
 
         private void trukkos(int _row , int _col)
         {
+            //It's magic
             var element = grid.Children
                 .OfType<FrameworkElement>()
                 .FirstOrDefault(e => e.Name =="b" + _row + "_" + _col);
             grid.Children.Remove(element);
             grid.Children.Add(level.BlokList[_row][_col].border_end());
+            //grid.Children.Add(Tesztborder(_row, _col));
+
         }
+        private Border Tesztborder(int row, int col)
+        {
+            Border b = new Border();
+
+            b.Height = Meretezes.blok;
+            b.Width = Meretezes.blok;
+            b.SetValue(Grid.RowProperty, row);
+            b.SetValue(Grid.ColumnProperty, col);
+            b.Background = Brushes.Red;
+
+            return b;
+        }
+
     }
 }

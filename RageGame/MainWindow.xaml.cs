@@ -63,6 +63,8 @@ namespace RageGame
             kekSzar.HorizontalAlignment = HorizontalAlignment.Left;
             kekSzar.Height = Meretezes.playermag;
             kekSzar.Width = Meretezes.playerszell;
+
+
             kekSzar.VerticalAlignment = VerticalAlignment.Top;
 
             kekSzar.Margin = new Thickness(31, 10, 0, 0);
@@ -74,6 +76,8 @@ namespace RageGame
             g.Children.Add(kekSzar);
             #endregion
 
+
+            Thread.Sleep(1000); // Kevésbé öli a gépet
             m = new Mozgas(kekSzar, egy, g);
         }
 

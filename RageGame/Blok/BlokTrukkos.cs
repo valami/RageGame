@@ -16,8 +16,9 @@ namespace RageGame
         public bool aktivalt = false;
 
 
-        public BlokTrukkos(int row, int col , Blok kezdo , Blok veg) : base(row, col, kezdo.Kep, kezdo.Szilard, trukkos)
+        public BlokTrukkos(int row, int col , Blok kezdo , Blok veg , int tipus) : base(row, col, kezdo.Kep, kezdo.Szilard, tipus)
         {
+            trukkos = tipus;
             this.Vegkep = veg.Kep;
             kep = kezdo.Kep;
             this.kezdo = kezdo;

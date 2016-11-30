@@ -13,7 +13,10 @@ namespace RageGame
         {            
 
         }
+        public Blok_ko() : base(0, 0, kep, szilard, trukkos)
+        {
 
+        }
 
     }
 }

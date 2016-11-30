@@ -11,6 +11,10 @@ namespace RageGame
         {
             
         }
+        public Blok_fold() : base(0, 0, kep, szilard, trukkos)
+        {
+
+        }
 
     }
 }
