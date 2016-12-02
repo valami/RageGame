@@ -75,10 +75,12 @@ namespace RageGame
                 backgroundWorker1.DoWork += new DoWorkEventHandler(
                 delegate (object o, DoWorkEventArgs args)
                 {
+                    Thread.Sleep(1000); //Betöltés utáni akadások megszüntetése
                     BackgroundWorker b = o as BackgroundWorker;
                     while (true)
                     {
                         b.ReportProgress(0);
+
                         Thread.Sleep(1);
                     }
                 });
@@ -286,7 +288,7 @@ namespace RageGame
                 }
             }
 
-            if (ObjectRight > Meretezes.ablakhossz - Meretezes.ablakhossz /4 - LevelLeft && ObjectLeft < ((level.BlokList[ButtomGrid].Count - 2 )* Bloksize) )
+            if (ObjectRight > Meretezes.ablakhossz - Meretezes.ablakhossz /4 - LevelLeft &&( LevelLeft * -1) + Sebesseg  < ((level.BlokList[ButtomGrid].Count )* Bloksize) - Meretezes.ablakhossz )
             {
                 grid.Margin = new Thickness(LevelLeft - Sebesseg, 0, 0, 0);
                 Objektum.Margin = new Thickness(ObjectLeft + Sebesseg, ObjectTop, 0, 0);
@@ -296,7 +298,10 @@ namespace RageGame
                 Objektum.Margin= new Thickness(ObjectLeft + Sebesseg, ObjectTop, 0, 0);
             }
 
-
+            if (debug)
+            {
+                int i = 0;
+            }
         }
 
         private void ugor()
