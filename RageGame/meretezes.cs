@@ -17,7 +17,14 @@ namespace RageGame
         public static void Szamol(MainWindow mw)
         {
             ablakhossz = mw.window.Width;
-            ablakmag = mw.window.Height;
+            if (mw.window.Height % 10 == 0)
+                ablakmag = mw.window.Height;
+            else
+            {
+                int temp = (int)mw.window.Height / 10;
+                ablakmag = temp * 10;
+            }
+
             blok = ablakmag / 10;
             playermag = (blok * 2) * 0.8;
             playerszell = blok  * 0.8;
