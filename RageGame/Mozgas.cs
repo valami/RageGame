@@ -15,7 +15,6 @@ namespace RageGame
 {
     class Mozgas
     {
-
         bool gravitacio = true;
         bool balra = false , jobbra = false ;
         bool lebeg = true;
@@ -24,6 +23,7 @@ namespace RageGame
         int LeftGrid, RightGrid, ButtomGrid , Sebesseg , Bloksize;
         public bool debug = false;
 
+        static public Mozgas mozgas;
         private Rectangle Objektum;
         private Level level;
         private Grid grid;
@@ -68,6 +68,7 @@ namespace RageGame
             Objektum = _objektum;
             level = _level;
             grid = _grid;
+            mozgas = this;
 
             #region BackgroundWorker
             backgroundWorker1.WorkerReportsProgress = true;                        
@@ -297,11 +298,6 @@ namespace RageGame
             {
                 Objektum.Margin= new Thickness(ObjectLeft + Sebesseg, ObjectTop, 0, 0);
             }
-
-            if (debug)
-            {
-                int i = 0;
-            }
         }
 
         private void ugor()
@@ -369,6 +365,7 @@ namespace RageGame
             //grid.Children.Add(Tesztborder(_row, _col));
 
         }
+
         private Border Tesztborder(int row, int col)
         {
             Border b = new Border();

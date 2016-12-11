@@ -22,14 +22,11 @@ namespace RageGame
     {
         List<Key> _pressedKeys = new List<Key>();
         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-        Level egy;
-        Rectangle kekSzar;
-        Mozgas m;
-        Grid g;
 
         public MainWindow()
         {
             InitializeComponent();
+            Fokepernyo.init(this);
             PrintKeys();
         }
 
@@ -40,51 +37,30 @@ namespace RageGame
             _pressedKeys.Add(e.Key);
 
             e.Handled = true;
-
-
+            
+            //bezárás
             if (e.Key == Key.Escape)
                 Close();
 
-
+            //debug
             if (e.Key == Key.Enter)
-                m.debug = !m.debug;
-        }
+                Mozgas.mozgas.debug = !Mozgas.mozgas.debug;
 
+            if (e.Key == Key.Tab)
+                Character.Dead();
+
+            if (e.Key == Key.Space)
+                Character.Revive();
+        }        //Gombnyomások levétele
+        
         private void Loadeded(object sender, RoutedEventArgs e)
         {
-            Meretezes.Szamol(this);
-
-            egy = new Level("lvl1.txt");
-
-            #region kekszar
-            kekSzar = new Rectangle();
-            kekSzar.Name = "kekSzar";
-            kekSzar.Fill = Brushes.Blue;
-            kekSzar.HorizontalAlignment = HorizontalAlignment.Left;
-            kekSzar.Height = Meretezes.playermag;
-            kekSzar.Width = Meretezes.playerszell;
-
-
-            kekSzar.VerticalAlignment = VerticalAlignment.Top;
-
-            kekSzar.Margin = new Thickness(31, 10, 0, 0);
-            kekSzar.SetValue(Grid.RowSpanProperty, 200);
-            kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
-            this.Content = egy.racs;
-
-            g = (this.Content as Grid);
-            g.Children.Add(kekSzar);
-            #endregion
-
-
-            Thread.Sleep(1000); // Kevésbé öli a gépet
-            m = new Mozgas(kekSzar, egy, g);
-        }
-
+            Meretezes.Szamol(this);             //Ablak méretezésének meghatározása
+            Fokepernyo.LoadMenu();              //Főmenü betöltése
+        } //Az ablak betöltése
 
         private void PrintKeys()
         {
-
             #region BackgroundWorker
             backgroundWorker1.WorkerReportsProgress = true;
             // what to do in the background thread
@@ -106,19 +82,18 @@ namespace RageGame
                     foreach (Key key in _pressedKeys)
                     {
                         if (key == Key.W)
-                            m.Jump();
+                            Mozgas.mozgas.Jump();
                         if (key == Key.A)
-                            m.Balra();
+                            Mozgas.mozgas.Balra();
                         if (key == Key.D)
-                            m.Jobbra();
+                            Mozgas.mozgas.Jobbra();
                     }
                 });
 
             backgroundWorker1.RunWorkerAsync();
             #endregion
 
-
-        }
+        } //Lenyomott gombok kezelése
 
         private void window_KeyUp(object sender, KeyEventArgs e)
         {

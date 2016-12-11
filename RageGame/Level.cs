@@ -11,13 +11,15 @@ namespace RageGame
         int hossz = 10;
         public Grid racs;
         public List<List<Blok>> BlokList;
+        public List<LevelPoint> LevelList;
 
         public Level(string nev)
         {
             BlokList = new List<List<Blok>>();
+            LevelList = new List<LevelPoint>();
             racs = new Grid();
             LoadMap(nev);
-            LoadLabel(nev);
+            LoadPoints(nev);
             MakeGrid();                   
         }
 
@@ -25,7 +27,7 @@ namespace RageGame
         {
            StreamReader sr = new StreamReader(nev);
            int o = 0;
-           while (o< 10)
+           while (o < 10)
 
             {
                 string sor = sr.ReadLine();
@@ -101,12 +103,24 @@ namespace RageGame
 
                 BlokList.Add(sorlista);
                 o++;
+               
             }
+            sr.Close();
         }
 
-        private void LoadLabel(string nev)
+        private void LoadPoints(string nev)
         {
-
+            StreamReader sm = new StreamReader(nev);
+            while (!sm.EndOfStream)
+            {
+                string sor = sm.ReadLine();
+                string[] blok = sor.Split(',');
+                if (blok[0] == "Checkpoint" || blok[0] == "Endpoint" || blok[0] == "Startpoint")
+                {
+                    LevelList.Add(new LevelPoint(blok[0],blok[1],blok[2]));
+                }
+            }
+            sm.Close();
         }
 
         private void MakeGrid()

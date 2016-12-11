@@ -70,7 +70,10 @@
     <Compile Include="Blok\Blok_fold.cs" />
     <Compile Include="Blok\Blok_ko.cs" />
     <Compile Include="Blok\Blok_levego.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="Fokepernyo.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="LevelPoint.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -122,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="lvl1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="hatter.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
