@@ -49,7 +49,7 @@ namespace RageGame
             if (e.Key == Key.Tab)
                 Character.Dead();
 
-            if (e.Key == Key.Space)
+            if (e.Key == Key.Space && !Character.el)
                 Character.Revive();
         }        //Gombnyomások levétele
         

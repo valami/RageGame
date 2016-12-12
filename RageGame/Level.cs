@@ -32,7 +32,7 @@ namespace RageGame
             {
                 string sor = sr.ReadLine();
 
-                string[] blok = sor.Split(',');
+                string[] blok = sor.Split(';');
                 if (o == 0)
                     hossz = blok.Length;
                 int i = 0;
@@ -90,14 +90,55 @@ namespace RageGame
                         racs.Children.Add(c);
                         sorlista.Add(b);
                     }
-                    else if (item == "m")
+                    else if (item == "a")
                     {
-                        Blok b = new BlokTrukkos(o, i,  new Blok_levego(), new Blok_fold(),3);
+                        Blok b = new BlokTrukkos(o, i, new Blok_ko(), new Blok_levego(), 2);
                         Border c = b.border();
                         racs.Children.Add(c);
                         sorlista.Add(b);
                     }
-
+                    else if (item == "m")
+                    {
+                        Blok b = new BlokTrukkos(o, i,  new Blok_levego(), new Blok_fold(),2);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+                    else if (item == "h")
+                    {
+                        Blok b = new Blokk_trukkosKo(o, i);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+                    else if (item == "1")
+                    {
+                        Blok b = new Blok_vege(o, i,1);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+                    else if (item == "2")
+                    {
+                        Blok b = new Blok_vege(o, i, 2);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+                    else if (item == "3")
+                    {
+                        Blok b = new Blok_vege(o, i, 3);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
+                    else if (item == "4")
+                    {
+                        Blok b = new Blok_vege(o, i, 4);
+                        Border c = b.border();
+                        racs.Children.Add(c);
+                        sorlista.Add(b);
+                    }
                     i++;
                 }                
 

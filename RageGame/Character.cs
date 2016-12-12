@@ -10,19 +10,30 @@ namespace RageGame
     {
         public static bool el = true;
         public static int elet = 3;
-        public static double LastLeft, LastTop , MapLeft;
+        public static double LastLeft = 31 , LastTop  = 10, LastMapLeft = 0;
 
         public static void Dead()
         {
-            el = false;
-            elet--;
+            el = false;            
             Fokepernyo.DeadScreen();
         }
 
         public static void Revive()
         {
             el = true;
-            Fokepernyo.LoadMenu();            
+            Fokepernyo.LoadLevel();            
+        }
+        public static void ReLoad()
+        {
+            LastLeft = 31;
+            LastTop = 10;
+            LastMapLeft = 0;
+        }
+        public static void SavePosition(double CharLeft , double CharTop , double MapLeft)
+        {
+            LastLeft = CharLeft;
+            LastTop = CharTop;
+            LastMapLeft = MapLeft;
         }
 
 

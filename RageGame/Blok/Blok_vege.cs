@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace RageGame
 {
-    class Blok_checkpoint : Blok
+    class Blok_vege : Blok
     {
-        static string kep = "cp_down.png";
         static bool szilard = false;
         static int trukkos = 4;
-        public Blok_checkpoint(int row, int col) : base(row, col, kep , szilard,trukkos)
+        public Blok_vege(int row, int col , int num) : base(row, col, num+".jpg" , szilard,trukkos)
         {
-            this.Vegkep = "cp_up.png";
+
         }        
     }
 }

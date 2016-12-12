@@ -51,7 +51,7 @@ namespace RageGame
             jatek.Background = null;
             jatek.BorderBrush = null;
             jatek.Click += gomb_Click;
-            Canvas.SetTop(jatek, Meretezes.ablakmag * 0.6);
+            Canvas.SetTop(jatek, Meretezes.ablakmag * 0.5);
             //Kilépés gomb 
             Button kilep = new Button();
             kilep.Name = "kilep";
@@ -75,7 +75,7 @@ namespace RageGame
 
         static public void LoadLevel()
         {     
-            egy = new Level("lvl1.txt");
+            egy = new Level("levelegy.csv");
 
             #region kekszar
             kekSzar = new Rectangle();
@@ -88,18 +88,18 @@ namespace RageGame
 
             kekSzar.VerticalAlignment = VerticalAlignment.Top;
 
-            kekSzar.Margin = new Thickness(31, 10, 0, 0);
+            kekSzar.Margin = new Thickness(Character.LastLeft, Character.LastTop, 0, 0);
             kekSzar.SetValue(Grid.RowSpanProperty, 200);
             kekSzar.SetValue(Grid.ColumnSpanProperty, 2000);
-            mw.Content = egy.racs;
-
+            mw.Content = egy.racs;            
             g = (mw.Content as Grid);
+            g.Margin = new Thickness(Character.LastMapLeft, 0, 0, 0);
             g.Children.Add(kekSzar);
             #endregion
             mw.Content = g;
             m = new Mozgas(kekSzar, egy, g);
         }
-
+        
         static public void DeadScreen()
         {
             Canvas fomenu = new Canvas();
