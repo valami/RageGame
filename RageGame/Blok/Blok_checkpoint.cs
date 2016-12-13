@@ -10,7 +10,7 @@ namespace RageGame
     {
         static string kep = "cp_down.png";
         static bool szilard = false;
-        static int trukkos = 4;
+        static int trukkos = 8;
         public Blok_checkpoint(int row, int col) : base(row, col, kep , szilard,trukkos)
         {
             this.Vegkep = "cp_up.png";

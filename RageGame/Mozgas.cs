@@ -27,21 +27,27 @@ namespace RageGame
 
         static public Mozgas mozgas;
         private Rectangle Objektum;
-        private Level level;
+        private LevelLoader level;
         private Grid grid;
 
         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
 
         #region Tulajdonság fv.
         public void Balra()
-        { 
+        {
             if (!meghaltal)
-            balra = true;
+            {
+                balra = true;
+                Fokepernyo.CharacterRotate(true);
+            }
         }
         public void Jobbra()
         {
             if (!meghaltal)
+            {
                 jobbra = true;
+                Fokepernyo.CharacterRotate(false);
+            }
         }
         public void Jump()
         {
@@ -69,7 +75,7 @@ namespace RageGame
         }        
         #endregion
 
-        public Mozgas(Rectangle _objektum , Level _level, Grid _grid)
+        public Mozgas(Rectangle _objektum , LevelLoader _level, Grid _grid)
         {
             Objektum = _objektum;
             level = _level;
@@ -100,9 +106,9 @@ namespace RageGame
                         if (gravitacio)
                             gravity();
                         if (balra)
-                            balra_mozog();
+                            Balra_mozog();
                         if (jobbra)
-                            jobbra_mozog();
+                            Jobbra_mozog();
                         if (jump > 0)
                             ugor();
                         if (jumpcd != 0)
@@ -128,7 +134,11 @@ namespace RageGame
                 Character.Dead();
                 ButtomGrid = 0;
                  if (bgrun)
+                {
                     Character.elet--;
+                    Music.PlayDead();
+                }
+
                 bgrun = false;               
                 backgroundWorker1.CancelAsync();
             }
@@ -147,62 +157,70 @@ namespace RageGame
                 Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 2, 0, 0);
 
             #region It's a trap
-            //Balra tüskés
-            if ((RightBlok.Trukkos != 0) && !RightBlok.Aktivalt)
+            //Jobbra érintve tüskés
+            if ((RightBlok.Trukkos != 0) && RightBlok.Trukkos != 2 && !RightBlok.Aktivalt)
             {
+                RightBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                if (RightBlok.Trukkos == 8 )
+                    Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                if (RightBlok.Trukkos == 9)
+                    NextLevel();
+                if (RightBlok.Trukkos == 3 || RightBlok.Trukkos == 1)
+                    Meghaltal();
+            }
+            //Balra érintve tüskés
+            if ((LeftBlok.Trukkos != 0) && LeftBlok.Trukkos != 2 && !LeftBlok.Aktivalt)
+            { 
                 LeftBlok.Aktivalt = true;
                 trukkos(ButtomGrid, LeftGrid);
-                if (LeftBlok.Trukkos == 4)
+                if ( LeftBlok.Trukkos == 8)
                     Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                if (LeftBlok.Trukkos == 9)
+                    NextLevel();
+                if (LeftBlok.Trukkos == 3 || LeftBlok.Trukkos == 1 )
+                    Meghaltal();
+            }                
+            //Rajt áll
+            if (RightGrid == LeftGrid && RightBlok.Trukkos != 0 && !RightBlok.Aktivalt)
+            {
+                RightBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                trukkos(ButtomGrid, RightGrid);
+                if (RightBlok.Trukkos == 8)
+                    Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                if (RightBlok.Trukkos == 9)
+                    NextLevel();
                 if (RightBlok.Trukkos == 3 || RightBlok.Trukkos == 1)
                     Meghaltal();
                 return;
             }
-                //Jobbra tüskés
-                if ((RightBlok.Trukkos != 0) && !RightBlok.Aktivalt)
-                {
-                    RightBlok.Aktivalt = true;
-                    trukkos(ButtomGrid, RightGrid);
-                    if (RightBlok.Trukkos == 4)
-                        Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
-                    if (RightBlok.Trukkos == 3 || RightBlok.Trukkos == 1 )
-                        Meghaltal();
-                    return;
-                }
-                //Rajt áll
-                if (RightGrid == LeftGrid && RightBlok.Trukkos != 0 && !RightBlok.Aktivalt)
-                {
-                    RightBlok.Aktivalt = true;
-                    trukkos(ButtomGrid, RightGrid);
-                    trukkos(ButtomGrid, RightGrid);
-                if (RightBlok.Trukkos == 3 || RightBlok.Trukkos == 1)
+            //Két eltűnőn áll
+            if (LeftBlok.Trukkos != 0 && RightBlok.Trukkos != 0 && (!RightBlok.Aktivalt || !LeftBlok.Aktivalt))
+            {
+                RightBlok.Aktivalt = true;
+                LeftBlok.Aktivalt = true;
+                trukkos(ButtomGrid, RightGrid);
+                trukkos(ButtomGrid, LeftGrid);
+                if (RightBlok.Trukkos == 8 && LeftBlok.Trukkos == 8)
+                    Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                if (RightBlok.Trukkos == 9 && LeftBlok.Trukkos == 9)
+                    NextLevel();
+                if ((RightBlok.Trukkos == 3 || RightBlok.Trukkos == 1) && (LeftBlok.Trukkos == 3 || LeftBlok.Trukkos == 1))
                     Meghaltal();
-                    return;
-                }
-                //Két eltűnőn áll
-                if (LeftBlok.Trukkos != 0 && RightBlok.Trukkos != 0 && (!RightBlok.Aktivalt || !LeftBlok.Aktivalt))
-                {
-                    RightBlok.Aktivalt = true;
-                    LeftBlok.Aktivalt = true;
-                    trukkos(ButtomGrid, RightGrid);
-                if (RightBlok.Trukkos == 3 || RightBlok.Trukkos == 1)
-                    Meghaltal();
-                    trukkos(ButtomGrid, RightGrid);
-                    trukkos(ButtomGrid, LeftGrid);
-                    return;
-                }
-                #endregion
+                return;
+            }
+            #endregion
 
-                if (!LeftBlok.Szilard && !RightBlok.Szilard)
-                {
-                    lebeg = true;
-                    Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 2, 0, 0);
-                    return;
-                }
-            
+            if (!LeftBlok.Szilard && !RightBlok.Szilard)
+            {
+                lebeg = true;
+                Objektum.Margin = new Thickness(ObjectLeft, ObjectTop + 2, 0, 0);
+                return;
+            }            
         }
 
-        private void balra_mozog()
+        private void Balra_mozog()
         {
             Szamol();
             balra = false;
@@ -235,40 +253,44 @@ namespace RageGame
                 LeftBlokUPUP = level.BlokList[ButtomGrid - 2][LeftGrid - 1];
             else
                 LeftBlokUPUP = level.BlokList[ButtomGrid - 3][LeftGrid - 1];
-            
+            #region csapda            
             if (lebeg)
             {
-                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!LeftBlok.Aktivalt || !LeftBlokUP.Aktivalt || !LeftBlokUPUP.Aktivalt))
+                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!LeftBlok.Aktivalt || !LeftBlokUP.Aktivalt || !LeftBlokUPUP.Aktivalt)
+                    && (LeftBlok.Trukkos != 2 || LeftBlokUP.Trukkos != 2 || LeftBlokUPUP.Trukkos != 2))
                 {
                     LeftBlok.Aktivalt = true;
                     LeftBlokUP.Aktivalt = true;
                     LeftBlokUPUP.Aktivalt = true;
-                    if (LeftBlok.Trukkos == 4 || LeftBlokUP.Trukkos == 4 || LeftBlokUPUP.Trukkos == 4)
+                    if (LeftBlok.Trukkos == 8 || LeftBlokUP.Trukkos == 8 || LeftBlokUPUP.Trukkos == 8)
                         Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                    if (LeftBlok.Trukkos == 9 || LeftBlokUP.Trukkos == 9 || LeftBlokUPUP.Trukkos == 9)
+                        NextLevel();
                     if (LeftBlok.Trukkos == 3 || LeftBlokUP.Trukkos == 3 || LeftBlokUPUP.Trukkos == 3)
                         Meghaltal();
                     trukkos(ButtomGrid - 1, LeftGrid - 1);
                     trukkos(ButtomGrid - 2, LeftGrid - 1);
-                    trukkos(ButtomGrid , LeftGrid - 1);
-                    return;
+                    trukkos(ButtomGrid , LeftGrid - 1);                    
                 }
             }
             else
             {
-                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!LeftBlok.Aktivalt || !LeftBlokUP.Aktivalt ))
+                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!LeftBlok.Aktivalt || !LeftBlokUP.Aktivalt )
+                    && (LeftBlok.Trukkos != 2 || LeftBlokUP.Trukkos != 2))
                 {
                     LeftBlok.Aktivalt = true;
                     LeftBlokUP.Aktivalt = true;
-                    if (LeftBlok.Trukkos == 4 || LeftBlokUP.Trukkos == 4 )
+                    if (LeftBlok.Trukkos == 8 || LeftBlokUP.Trukkos == 8 )
                         Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                    if (LeftBlok.Trukkos == 9 || LeftBlokUP.Trukkos == 9 || LeftBlokUPUP.Trukkos == 9)
+                        NextLevel();
                     if (LeftBlok.Trukkos == 3 || LeftBlokUP.Trukkos == 3 || LeftBlokUPUP.Trukkos == 3)
                         Meghaltal();
                     trukkos(ButtomGrid - 1, LeftGrid - 1);
                     trukkos(ButtomGrid - 2, LeftGrid - 1);
-                    return;
                 }
             }
-            
+            #endregion
             if (lebeg)
             {
                 if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (LeftBlok.Szilard || LeftBlokUP.Szilard || LeftBlokUPUP.Szilard))
@@ -298,7 +320,7 @@ namespace RageGame
                                
         }
 
-        private void jobbra_mozog()
+        private void Jobbra_mozog()
         {
             Szamol();
             jobbra = false;
@@ -332,16 +354,19 @@ namespace RageGame
                     RightBlokUPUP = level.BlokList[ButtomGrid - 2][LeftGrid + 1];
                 else
                     RightBlokUPUP = level.BlokList[ButtomGrid - 3][LeftGrid + 1];
-            
+            #region csapda
             if (lebeg)
             {
-                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!RightBlok.Aktivalt || !RightBlokUP.Aktivalt || !RightBlokUPUP.Aktivalt))
+                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!RightBlok.Aktivalt || !RightBlokUP.Aktivalt || !RightBlokUPUP.Aktivalt)
+                    && (RightBlok.Trukkos != 2 || RightBlokUP.Trukkos != 2 || RightBlokUPUP.Trukkos != 2))
                 {
                     RightBlok.Aktivalt = true;
                     RightBlokUP.Aktivalt = true;
                     RightBlokUPUP.Aktivalt = true;
-                    if (RightBlok.Trukkos == 4 || RightBlokUP.Trukkos == 4 || RightBlokUPUP.Trukkos == 4)
+                    if (RightBlok.Trukkos == 8 || RightBlokUP.Trukkos == 8 || RightBlokUPUP.Trukkos == 8)
                         Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                    if (RightBlok.Trukkos == 9 || RightBlokUP.Trukkos == 9 || RightBlokUPUP.Trukkos == 9)
+                        NextLevel();
                     if (RightBlok.Trukkos == 3 || RightBlokUP.Trukkos == 3 || RightBlokUPUP.Trukkos == 3)
                         Meghaltal();
                     trukkos(ButtomGrid , LeftGrid + 1);
@@ -352,20 +377,22 @@ namespace RageGame
             }
             else
             {
-                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!RightBlok.Aktivalt || !RightBlokUP.Aktivalt))
+                if (ObjectLeft - Sebesseg < LeftGrid * Bloksize && (!RightBlok.Aktivalt || !RightBlokUP.Aktivalt)
+                    && (RightBlok.Trukkos != 2 || RightBlokUP.Trukkos != 2))
                 {
                     RightBlok.Aktivalt = true;
                     RightBlokUP.Aktivalt = true;
-                    if (RightBlok.Trukkos == 4 || RightBlokUP.Trukkos == 4)
+                    if (RightBlok.Trukkos == 8 || RightBlokUP.Trukkos == 8)
                         Character.SavePosition(ObjectLeft, ObjectTop, grid.Margin.Left);
+                    if (RightBlok.Trukkos == 9 || RightBlokUP.Trukkos == 9)
+                        NextLevel();
                     if (RightBlok.Trukkos == 3 || RightBlokUP.Trukkos == 3)
                         Meghaltal();
                     trukkos(ButtomGrid - 1, LeftGrid + 1);
                     trukkos(ButtomGrid - 2, LeftGrid + 1);
-
                 }
             }
-            
+            #endregion
             if (lebeg)
             {
                 if (ObjectRight + Sebesseg > (LeftGrid + 1) * Bloksize && (RightBlok.Szilard || RightBlokUP.Szilard || RightBlokUPUP.Szilard))
@@ -437,6 +464,7 @@ namespace RageGame
             if (TLeftBlok.Szilard || TRightBlok.Szilard)
             {
                 Objektum.Margin = new Thickness(ObjectLeft, (ButtomGrid - 2) * Bloksize + 1, 0, 0); //0.4 = 2 * 0.2
+                Music.PlayJump();
                 jump = 0;
                 gravitacio = true;
                 return;
@@ -445,6 +473,7 @@ namespace RageGame
             if (ObjectTop > 1)
             {
                 Objektum.Margin = new Thickness(ObjectLeft, ObjectTop - Sebesseg/1.5/2, 0, 0);
+                Music.PlayJump();
             }
         }
 
@@ -459,6 +488,7 @@ namespace RageGame
             //grid.Children.Add(Tesztborder(_row, _col));
 
         }
+
         private void Meghaltal()
         {
             meghaltal = true;
@@ -477,6 +507,17 @@ namespace RageGame
 
             return b;
         }//töröööni
+        private void NextLevel()
+        {
+            if (bgrun)
+            {
+                LevelList.NextLevel();
+                Character.ReLoad();
+                Fokepernyo.LoadLevel();
+            }
+            bgrun = false;
+        }
+
 
     }
 }

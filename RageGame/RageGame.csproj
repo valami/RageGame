@@ -74,8 +74,12 @@
     <Compile Include="Blok\Blok_levego.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Fokepernyo.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="LevelPoint.cs" />
+    <Compile Include="LevelList.cs" />
+    <Compile Include="LevelLoader.cs" />
+    <Compile Include="Level\ILevel.cs" />
+    <Compile Include="Level\Level1.cs" />
+    <Compile Include="Level\Level2.cs" />
+    <Compile Include="Level\Level3.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -84,6 +88,7 @@
   <ItemGroup>
     <Compile Include="Meretezes.cs" />
     <Compile Include="Mozgas.cs" />
+    <Compile Include="Music.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -112,37 +117,52 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="fold.jpg" />
+    <Resource Include="Content\Image\fold.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ko.jpg" />
+    <Resource Include="Content\Image\ko.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="levego.jpg" />
+    <Resource Include="Content\Image\levego.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="cp_down.jpg" />
-    <Resource Include="cp_up.jpg" />
-    <Resource Include="fold_trukkos.jpg" />
+    <Resource Include="Content\Image\fold_trukkos.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="lvl1.txt" />
+    <Resource Include="Content\Image\hatter.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="hatter.jpg" />
+    <Resource Include="Content\Image\ko_trukkos.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ko_trukkos.jpg" />
+    <Resource Include="Content\Image\cp_down.png" />
+    <Resource Include="Content\Image\cp_up.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="cp_down.png" />
-    <Resource Include="cp_up.png" />
+    <Resource Include="Content\Image\1.jpg" />
+    <Resource Include="Content\Image\2.jpg" />
+    <Resource Include="Content\Image\3.jpg" />
+    <Resource Include="Content\Image\4.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="1.jpg" />
-    <Resource Include="2.jpg" />
-    <Resource Include="3.jpg" />
-    <Resource Include="4.jpg" />
+    <Resource Include="Content\Image\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Image\player_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Sound\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -38,10 +38,10 @@ namespace RageGame
                 return trukkos;
                 /*  0 -  Nincs
                  *  1 -  Felül érintésre
-                 *  2 -  Felül teljes
+                 *  2 -  Felül teljes -nem öl
                  *  3 -  Bárhol érintve 
-                 *  4 -  Mentés
-                 * 
+                 *  4 -  Bárhol érintve -nem öl
+                 *  8 -  Mentés
                 */
             }
         }
@@ -132,7 +132,7 @@ namespace RageGame
             {
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("pack://application:,,,/" + vegkep, UriKind.RelativeOrAbsolute));
+                    new BitmapImage(new Uri("pack://application:,,,/Content/Image/" + vegkep, UriKind.RelativeOrAbsolute));
 
                 b.Background = myBrush;
             }
@@ -145,7 +145,7 @@ namespace RageGame
         {
             ImageBrush myBrush = new ImageBrush();
             myBrush.ImageSource =
-                new BitmapImage(new Uri("pack://application:,,,/" + kep, UriKind.RelativeOrAbsolute));
+                new BitmapImage(new Uri("pack://application:,,,/Content/Image/" + kep, UriKind.RelativeOrAbsolute));
             return myBrush;          
         }
 

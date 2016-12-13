@@ -9,7 +9,7 @@ namespace RageGame
     class Blok_vege : Blok
     {
         static bool szilard = false;
-        static int trukkos = 4;
+        static int trukkos = 9;
         public Blok_vege(int row, int col , int num) : base(row, col, num+".jpg" , szilard,trukkos)
         {
 
