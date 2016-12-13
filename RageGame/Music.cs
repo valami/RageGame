@@ -36,15 +36,15 @@ namespace RageGame
         }
         static public void PlayJump()
         {
-          //  playerjump.controls.stop();
-          //  playerjump.URL = "coin.mp3";
-           // playerjump.controls.play();
+            //playerjump.controls.stop();
+            //playerjump.URL = "ugras.mp3";
+            //playerjump.controls.play();
         }
         static public void PlayDead()
         {
-            playerdead.controls.stop();
-            playerdead.URL = "coin.mp3";
-            playerdead.controls.play();
+            //playerdead.controls.stop();
+            //playerdead.URL = "halal.mp3";
+            //playerdead.controls.play();
         }
     }
 }

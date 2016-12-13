@@ -110,7 +110,8 @@ namespace RageGame
             Canvas fomenu = new Canvas();
             ImageBrush myBrush = new ImageBrush();
             myBrush.ImageSource =
-                new BitmapImage(new Uri("pack://application:,,,/Content/Image/hatter.jpg", UriKind.Absolute));
+                new BitmapImage(new Uri("pack://application:,,,/Content/Image/halal.jpg", UriKind.Absolute));
+
 
             fomenu.Background = myBrush;
             //Főcím
