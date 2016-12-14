@@ -1,4 +1,7 @@
 ﻿using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System;
 
 namespace RageGame
 {
@@ -15,19 +18,20 @@ namespace RageGame
             player.controls.stop();
             player.URL = "menu.mp3";
             player.controls.play();
-
- 
         }
+
         static public void PlayEnd()
         {
             player.controls.stop();
             player.URL = "menu.mp3";
             player.controls.play();
         }
+
         static public void PlayLevel(string URL)
         {
             if (Last != URL)
             {
+                playerdead.controls.stop();
                 player.controls.stop();
                 player.URL = URL;
                 player.controls.play();
@@ -42,9 +46,10 @@ namespace RageGame
         }
         static public void PlayDead()
         {
-            //playerdead.controls.stop();
-            //playerdead.URL = "halal.mp3";
-            //playerdead.controls.play();
+            player.controls.stop();
+            playerdead.controls.stop();
+            playerdead.URL = "halal.mp3";
+            playerdead.controls.play();
         }
     }
 }

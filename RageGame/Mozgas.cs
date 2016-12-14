@@ -493,6 +493,7 @@ namespace RageGame
         {
             meghaltal = true;
             jump = 30;
+            Music.PlayDead();
         }
 
         private Border Tesztborder(int row, int col)

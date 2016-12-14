@@ -109,8 +109,7 @@ namespace RageGame
         {
             Canvas fomenu = new Canvas();
             ImageBrush myBrush = new ImageBrush();
-            myBrush.ImageSource =
-                new BitmapImage(new Uri("pack://application:,,,/Content/Image/hala.jpg", UriKind.Absolute));
+            myBrush.ImageSource =new BitmapImage(new Uri("pack://application:,,,/Content/Image/halal.jpg", UriKind.Absolute));
 
 
             fomenu.Background = myBrush;
@@ -123,6 +122,8 @@ namespace RageGame
             cim.HorizontalContentAlignment = HorizontalAlignment.Center;
             cim.Width = Meretezes.ablakhossz;
             Canvas.SetTop(cim, Meretezes.ablakmag * 0.2);
+
+
             //Meghaltál szöve 
             Label meghaltal = new Label();
             meghaltal.Content = "Meghaltál";
@@ -132,6 +133,7 @@ namespace RageGame
             meghaltal.HorizontalContentAlignment = HorizontalAlignment.Center;
             meghaltal.Width = Meretezes.ablakhossz;
             Canvas.SetTop(meghaltal, Meretezes.ablakmag * 0.6);
+
             //Életek száma  
             Label elet = new Label();
             elet.Content = "Élet:" + Character.elet;
@@ -168,7 +170,7 @@ namespace RageGame
             cim.Width = Meretezes.ablakhossz;
             //Meghaltál szöve 
             Label meghaltal = new Label();
-            meghaltal.Content = "Gratulálunk megcsinéltad a lehetetlent";
+            meghaltal.Content = "Gratulálunk megcsináltad a lehetetlent";
             meghaltal.FontFamily = new FontFamily("Bauhaus 93");
             meghaltal.FontSize = 100;
             meghaltal.Foreground = Brushes.DarkBlue;

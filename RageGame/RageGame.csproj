@@ -164,7 +164,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Content\Image\hala.jpg" />
+    <Resource Include="Content\Image\halal.jpg" />
     <Content Include="Content\Sound\halal.mp3" />
     <Content Include="Content\Sound\level1.mp3" />
     <Content Include="Content\Sound\level2.mp3" />
