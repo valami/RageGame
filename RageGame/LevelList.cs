@@ -9,10 +9,14 @@ namespace RageGame
 {
     static class LevelList
     {
-        static List<ILevel> LevelLista = new List<ILevel> {  new Level1() , new Level2(), new Level3(), new Level4() };
+        static List<ILevel> LevelLista = new List<ILevel> {  new Level1() , new Level2(), new Level3(), new Level4() ,null};
         static int ActualNum = 0;
         public static string[] Actual()
         {
+            if (LevelLista[ActualNum] == null)
+            {
+                Fokepernyo.EndScreen();
+            }
             return LevelLista[ActualNum].map();
         }
         public static string Music()
@@ -22,10 +26,7 @@ namespace RageGame
         public static  void NextLevel()
         {
             ActualNum++;
-            if (ActualNum > LevelLista.Count)
-            {
-                Fokepernyo.EndScreen();
-            }
+
         }
     }
 }

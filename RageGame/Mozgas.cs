@@ -89,7 +89,7 @@ namespace RageGame
                 backgroundWorker1.DoWork += new DoWorkEventHandler(
                 delegate (object o, DoWorkEventArgs args)
                 {
-                    Thread.Sleep(1000); //Betöltés utáni akadások megszüntetése
+                    Thread.Sleep(100); //Betöltés utáni akadások megszüntetése
                     BackgroundWorker b = o as BackgroundWorker;
                     while (bgrun)
                     {
@@ -496,18 +496,6 @@ namespace RageGame
             Music.PlayDead();
         }
 
-        private Border Tesztborder(int row, int col)
-        {
-            Border b = new Border();
-
-            b.Height = Meretezes.blok;
-            b.Width = Meretezes.blok;
-            b.SetValue(Grid.RowProperty, row);
-            b.SetValue(Grid.ColumnProperty, col);
-            b.Background = Brushes.Red;
-
-            return b;
-        }//töröööni
         private void NextLevel()
         {
             if (bgrun)
@@ -518,7 +506,5 @@ namespace RageGame
             }
             bgrun = false;
         }
-
-
     }
 }

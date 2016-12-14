@@ -29,14 +29,11 @@ namespace RageGame
 
         static public void PlayLevel(string URL)
         {
-            if (Last != URL)
-            {
-                playerdead.controls.stop();
-                player.controls.stop();
-                player.URL = URL;
-                player.controls.play();
-                Last = URL;
-            }
+            playerdead.controls.stop();
+            player.controls.stop();
+            player.URL = URL;
+            player.controls.play();
+            Last = URL;
         }
         static public void PlayJump()
         {

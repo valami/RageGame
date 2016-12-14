@@ -42,13 +42,6 @@ namespace RageGame
             if (e.Key == Key.Escape)
                 Close();
 
-            //debug
-            if (e.Key == Key.Enter)
-                Mozgas.mozgas.debug = !Mozgas.mozgas.debug;
-
-            if (e.Key == Key.Tab)
-                Character.Dead();
-
             if (e.Key == Key.Space && !Character.el)
                 Character.Revive();
         }        //Gombnyomások levétele
