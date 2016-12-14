@@ -110,7 +110,7 @@ namespace RageGame
             Canvas fomenu = new Canvas();
             ImageBrush myBrush = new ImageBrush();
             myBrush.ImageSource =
-                new BitmapImage(new Uri("pack://application:,,,/Content/Image/halal.jpg", UriKind.Absolute));
+                new BitmapImage(new Uri("pack://application:,,,/Content/Image/hala.jpg", UriKind.Absolute));
 
 
             fomenu.Background = myBrush;
@@ -122,6 +122,7 @@ namespace RageGame
             cim.Foreground = Brushes.DarkBlue;
             cim.HorizontalContentAlignment = HorizontalAlignment.Center;
             cim.Width = Meretezes.ablakhossz;
+            Canvas.SetTop(cim, Meretezes.ablakmag * 0.2);
             //Meghaltál szöve 
             Label meghaltal = new Label();
             meghaltal.Content = "Meghaltál";
